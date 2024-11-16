@@ -1,95 +1,166 @@
+"use client";
+
+import { ChangeEvent, useEffect, useState } from "react";
+
+import { Featured, Icons } from "./enums/enum";
+import { Planets } from "./interfaces/planets";
 import Image from "next/image";
-import styles from "./page.module.css";
+import styles from "./styles/home.module.scss";
+import vars from "./styles/variables.module.scss";
+
+interface iDefault {
+  defaultValue: string | null;
+}
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [isClient, setIsClient] = useState(false);
+  const [items, setItems] = useState<Array<Planets>>([]);
+  const [filteredItems, setFilteredItems] = useState<Array<Planets>>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [featured, setFeatured] = useState<Array<Planets>>([]);
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+  const url = "https://swapi.dev/api/planets";
+
+  const getRandomIcon = () => {
+    const icons = Object.values(Icons);
+    const randomIndex = Math.floor(Math.random() * icons.length);
+    return icons[randomIndex];
+  };
+
+  useEffect(() => {
+    let results: Planets[] = [];
+    let featured: Planets[] = [];
+
+    const fetchData = async () => {
+      setIsLoading(true);
+      for (let i = 1; i <= 6; i++) {
+        const response = await fetch(`${url}?page=${i}`);
+        const data = await response.json();
+
+        data.results.forEach((x) => {
+          results.push(x);
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+      }
+
+      const featured = results.filter((result) => {
+        const enumFeature = Object.values(Featured) as Array<string>;
+        return enumFeature.includes(result.name);
+      });
+
+      setFeatured(featured);
+      setItems(results);
+      setFilteredItems(results);
+
+      setIsLoading(false);
+    };
+
+    fetchData();
+  }, []);
+
+  const [inputValue, setValue] = useState("");
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+    setValue(inputValue);
+
+    const filtered = items.filter((x) => {
+      return x.name.toLowerCase().includes(inputValue.toLowerCase());
+    });
+
+    setFilteredItems(filtered);
+  };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div>
+      <div className={styles.homebanner}>
+        <h1 style={{ color: "white", marginTop: 0 }}>The Planets Of:</h1>
+        <Image
+          src="/images/star-wars-logo.svg"
+          width={500}
+          height={200}
+          alt="Star Wars logo"
+        />
+      </div>
+      <div className={styles.homeContent}>
+        <div className="row">
+          <h1 style={{ color: vars.yellow, textAlign: "center" }}>
+            Featured Planets
+          </h1>
+          {featured.map((planet) => (
+            <div className="col">
+              <div className={styles.featuredPlanet}>
+                <div className="flexObjectHorizontal">
+                  <div>
+                    <Image
+                      className={styles.planetImg}
+                      src="/images/planets/endor.png"
+                      width={200}
+                      height={200}
+                      alt="Star Wars logo"
+                    />
+                  </div>
+                  <div className={styles.featuredPlanetText}>
+                    <h2>{planet.name}</h2>
+                    <span className="block">
+                      <span className="label">Rotation Period: </span>
+                      {planet.rotation_period}
+                    </span>
+                    <span className="block">
+                      <span className="label">Orbital Period: </span>
+                      {planet.orbital_period}
+                    </span>
+                    <span className="block">
+                      <span className="label">Terrain: </span>
+                      {planet.terrain}
+                    </span>
+                    <span className="block">
+                      <span className="label">Climate: </span>
+                      {planet.climate}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div className="row">
+          <div className={styles.planetsSearch}>
+            <h1 style={{ color: vars.yellow }}>All Planets</h1>
+            <input
+              className={styles.searchBar}
+              type="text"
+              id="inputId"
+              placeholder="Search by planet name..."
+              value={inputValue ?? ""}
+              onChange={handleChange}
+            ></input>
+          </div>
+        </div>
+        <div className="row">
+          <div className={styles.planetChipsWrapper}>
+            {filteredItems.map((planet) => (
+              <div className={styles.planetChip}>
+                <Image
+                  className={styles.planetChipIcon}
+                  src={getRandomIcon()}
+                  width={36}
+                  height={36}
+                  alt="Star Wars Icon"
+                />
+                {planet.name}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
