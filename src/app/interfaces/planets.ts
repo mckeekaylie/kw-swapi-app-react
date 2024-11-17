@@ -14,3 +14,10 @@ export interface Planets {
   edited: string;
   url: string;
 }
+
+export interface PlanetRes {
+  count: number;
+  next?: string;
+  previous?: string;
+  results: Planets[];
+}

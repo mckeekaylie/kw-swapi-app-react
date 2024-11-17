@@ -3,20 +3,18 @@
 import { ChangeEvent, useEffect, useState } from "react";
 
 import { Featured, Icons } from "./enums/enum";
-import { Planets } from "./interfaces/planets";
+import { Planets, PlanetRes } from "./interfaces/planets";
 import Image from "next/image";
 import styles from "./styles/home.module.scss";
 import vars from "./styles/variables.module.scss";
-
-interface iDefault {
-  defaultValue: string | null;
-}
+import Link from "next/link";
+import { getPlanets } from "./hooks/getPlanets";
 
 export default function Home() {
-  const [isClient, setIsClient] = useState(false);
-  const [items, setItems] = useState<Array<Planets>>([]);
+  const { data, isLoading, isValidating } = getPlanets();
+
+  const [items, setItems] = useState<Array<any>>([]);
   const [filteredItems, setFilteredItems] = useState<Array<Planets>>([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [featured, setFeatured] = useState<Array<Planets>>([]);
 
   const url = "https://swapi.dev/api/planets";
@@ -28,38 +26,31 @@ export default function Home() {
   };
 
   useEffect(() => {
-    let results: Planets[] = [];
-    let featured: Planets[] = [];
+    if (!isLoading && !isValidating) {
+      let planetsContainer: Planets[] = [];
 
-    const fetchData = async () => {
-      setIsLoading(true);
-      for (let i = 1; i <= 6; i++) {
-        const response = await fetch(`${url}?page=${i}`);
-        const data = await response.json();
-
-        data.results.forEach((x) => {
-          results.push(x);
-        });
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
+      if (data && data.length !== undefined) {
+        for (let i = 0; i <= data.length; i++) {
+          data[i]?.results.map((x) => {
+            planetsContainer.push(x);
+          });
         }
       }
 
-      const featured = results.filter((result) => {
-        const enumFeature = Object.values(Featured) as Array<string>;
-        return enumFeature.includes(result.name);
+      const featuredPlanets = planetsContainer.filter((planet) => {
+        const featuredEnumVals = Object.values(Featured) as Array<string>;
+        return featuredEnumVals.includes(planet.name);
       });
 
-      setFeatured(featured);
-      setItems(results);
-      setFilteredItems(results);
+      const resultsAbc = planetsContainer.sort((a, b) => {
+        return a["name"].localeCompare(b["name"]);
+      });
 
-      setIsLoading(false);
-    };
-
-    fetchData();
-  }, []);
+      setItems(planetsContainer);
+      setFilteredItems(resultsAbc);
+      setFeatured(featuredPlanets);
+    }
+  }, [data]);
 
   const [inputValue, setValue] = useState("");
 
@@ -90,12 +81,12 @@ export default function Home() {
         />
       </div>
       <div className={styles.homeContent}>
-        <div className="row">
+        <div className="row" key="featured">
           <h1 style={{ color: vars.yellow, textAlign: "center" }}>
             Featured Planets
           </h1>
           {featured.map((planet) => (
-            <div className="col">
+            <div className="col" key={planet.name}>
               <div className={styles.featuredPlanet}>
                 <div className="flexObjectHorizontal">
                   <div>
@@ -131,31 +122,36 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <div className="row">
+        <div className="row" key="search">
           <div className={styles.planetsSearch}>
-            <h1 style={{ color: vars.yellow }}>All Planets</h1>
+            <h1 style={{ color: vars.yellow }}>All Planets (A to Z)</h1>
             <input
               className={styles.searchBar}
               type="text"
               id="inputId"
-              placeholder="Search by planet name..."
+              placeholder="Filter by planet name..."
               value={inputValue ?? ""}
               onChange={handleChange}
             ></input>
           </div>
         </div>
         <div className="row">
-          <div className={styles.planetChipsWrapper}>
+          <div className={styles.planetChipsWrapper} key="chips">
             {filteredItems.map((planet) => (
-              <div className={styles.planetChip}>
-                <Image
-                  className={styles.planetChipIcon}
-                  src={getRandomIcon()}
-                  width={36}
-                  height={36}
-                  alt="Star Wars Icon"
-                />
-                {planet.name}
+              <div key={planet.name}>
+                <Link
+                  className={styles.planetChip}
+                  href={`/planet-detail/${planet.name}`}
+                >
+                  {planet.name}
+                  <Image
+                    className={styles.planetChipIcon}
+                    src={getRandomIcon()}
+                    width={36}
+                    height={36}
+                    alt="Star Wars Icon"
+                  />
+                </Link>
               </div>
             ))}
           </div>

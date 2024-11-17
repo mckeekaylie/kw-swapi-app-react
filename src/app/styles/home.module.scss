@@ -67,9 +67,9 @@
 
 .planetChip {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  width: 10rem;
+  width: 16rem;
   height: 4rem;
   margin: 1rem;
   padding: 0.5rem;
@@ -77,6 +77,11 @@
   background-color: $orange;
   color: white;
   font-size: 1.25rem;
+}
+
+.planetChip:hover {
+  background-color: #900e0a;
+  cursor: pointer;
 }
 
 .planetChipIcon {
