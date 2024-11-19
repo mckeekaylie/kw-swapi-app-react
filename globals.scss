@@ -29,12 +29,11 @@
 
 .col {
   flex: 1 0 30%;
-  padding: 1rem;
 }
 
 .flexObjectHorizontal {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 }
 

@@ -25,24 +25,12 @@
 .homeContent {
   padding: 1rem;
   background-color: $galaxy;
-  // background-color: $blue;
-  // background: rgb(22, 66, 113);
-  // background: linear-gradient(
-  //   173deg,
-  //   rgba(22, 66, 113, 1) 35%,
-  //   rgba(76, 111, 131, 1) 100%
-  // );
 }
 
 .featuredPlanet {
-  // background: rgb(129, 163, 177);
-  // background: radial-gradient(
-  //   circle,
-  //   rgba(129, 163, 177, 1) 35%,
-  //   rgba(22, 66, 113, 1) 100%
-  // );
   padding: 1rem;
   margin: 1rem;
+  height: 12rem;
   border: 0.25rem solid $blue;
   border-radius: 1rem;
 
@@ -52,6 +40,7 @@
 }
 
 .featuredPlanetText {
+  width: 52%;
   padding: 0 1rem;
   color: white;
   display: block;
@@ -77,6 +66,7 @@
   background-color: $orange;
   color: white;
   font-size: 1.25rem;
+  text-decoration: none;
 }
 
 .planetChip:hover {
@@ -89,8 +79,6 @@
 }
 
 .planetChipsWrapper {
-  height: 20rem;
-  overflow: auto;
   padding: 0.5rem;
   display: flex;
   flex-wrap: wrap;

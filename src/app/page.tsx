@@ -3,7 +3,7 @@
 import { ChangeEvent, useEffect, useState } from "react";
 
 import { Featured, Icons } from "./enums/enum";
-import { Planets, PlanetRes } from "./interfaces/planets";
+import { Planets } from "./interfaces/planets";
 import Image from "next/image";
 import styles from "./styles/home.module.scss";
 import vars from "./styles/variables.module.scss";
@@ -81,8 +81,11 @@ export default function Home() {
         />
       </div>
       <div className={styles.homeContent}>
-        <div className="row" key="featured">
-          <h1 style={{ color: vars.yellow, textAlign: "center" }}>
+        <div
+          className="row"
+          style={{ marginTop: "1rem", marginBottom: "1rem" }}
+        >
+          <h1 style={{ color: vars.yellow, textAlign: "center", margin: "0" }}>
             Featured Planets
           </h1>
           {featured.map((planet) => (
@@ -92,10 +95,10 @@ export default function Home() {
                   <div>
                     <Image
                       className={styles.planetImg}
-                      src="/images/planets/endor.png"
+                      src={"/images/planets/" + planet.name + ".png"}
                       width={200}
                       height={200}
-                      alt="Star Wars logo"
+                      alt={planet.name}
                     />
                   </div>
                   <div className={styles.featuredPlanetText}>
