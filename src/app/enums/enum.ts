@@ -1,4 +1,3 @@
-// types.ts
 export enum Featured {
   Feature1 = "Tatooine",
   Feature2 = "Endor",
@@ -10,15 +9,8 @@ export enum Featured {
 
 export enum Icons {
   AtAtWalker = "/images/icons/at-at-walker.svg",
-  DeathStar = "/images/icons/death-star.svg",
-  MillenniumFalcon = "/images/icons/hyperdrive.svg",
-  JediOrder = "/images/icons/jedi-order.svg",
-  LightSaber = "/images/icons/light-saber.svg",
-}
-
-export enum PlanetSectors {
-  OuterRim = "Outer Rim",
-  MidRim = "Mid Rim",
-  InnerRim = "Inner Rim",
-  CoreWorlds = "Core Worlds",
+  MillenniumFalcon = "/images/icons/millennium-falcon.svg",
+  XWing = "/images/icons/xwing.svg",
+  R2 = "/images/icons/r2.svg",
+  BobaFett = "/images/icons/boba-fett.svg",
 }

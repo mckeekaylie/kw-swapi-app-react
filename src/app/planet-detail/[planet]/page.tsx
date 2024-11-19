@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Planets } from "@/app/interfaces/planets";
 import styles from "../../styles/detail.module.scss";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function PlanetDetail({ params }) {
   const { data, isLoading, isValidating } = getPlanets();
@@ -35,64 +36,84 @@ export default function PlanetDetail({ params }) {
 
   return (
     <div>
+      <div className={`${styles.topBar} p-1`}>
+        <Link href={`/`}>
+          <Image
+            className={styles.backArrow}
+            src="/images/icons/back-arrow.svg"
+            width={36}
+            height={36}
+            alt="Return to home"
+          />
+        </Link>
+      </div>
       <div className={styles.planetDetailCover}>
         <div>
-          <h1>{planet?.name}</h1>
-          <div className="d-flex">
-            <h4>Diameter: {planet?.diameter}</h4>
-            <h4>Gravity: {planet?.gravity}</h4>
-            <h4>Surface Water: {planet?.surface_water}</h4>
+          <h1 className="mb-1">{planet?.name}</h1>
+          <div className="flex justifyBetweenAlignCenter">
+            <h5 className="pr-2">
+              Diameter: <span className="fw-400">{planet?.diameter}</span>
+            </h5>
+            <h5 className="pr-2">
+              Gravity: <span className="fw-400">{planet?.gravity}</span>
+            </h5>
+            <h5 className="pr-2">
+              Surface Water:{" "}
+              <span className="fw-400">{planet?.surface_water}</span>
+            </h5>
           </div>
         </div>
       </div>
-      <div className={styles.detailContent}>
+      <div className="pageContent">
         <div className="row">
           <div className="col">
-            <div className={styles.climateTerrain}>
-              {/* <Image
-                className={styles.planetImg}
-                src="/images/thermometer.svg"
-                width={200}
-                height={200}
-                alt="Star Wars logo"
-              /> */}
-              <h2>Climate</h2>
-              {planet?.climate}
+            <div className={`${styles.climateTerrain} p-1 m-1`}>
+              <div className="flex justifyCenterAlignCenter">
+                <Image
+                  className={styles.climateTerrainIcon}
+                  src="/images/icons/climate.svg"
+                  width={56}
+                  height={56}
+                  alt="Climate icon"
+                />
+                <h5>Climate</h5>
+              </div>
+              <h5 className="fw-400">{planet?.climate}</h5>
             </div>
           </div>
           <div className="col">
-            <div className={styles.climateTerrain}>
-              <h2>Terrain</h2>
-              {planet?.terrain}
+            <div className={`${styles.climateTerrain} p-1 m-1`}>
+              <div className="flex justifyCenterAlignCenter">
+                <Image
+                  className={styles.climateTerrainIcon}
+                  src="/images/icons/terrain.svg"
+                  width={54}
+                  height={54}
+                  alt="Terrain icon"
+                />
+                <h5>Terrain</h5>
+              </div>
+              <h5 className="fw-400">{planet?.terrain}</h5>
             </div>
           </div>
         </div>
+        <div className="spacer"></div>
         <div className="row">
           <div className="col">
             <div className={styles.orbitalWrapper}>
-              <h3 className="textLg">
-                Orbital Period: {planet?.orbital_period}
-              </h3>
-              <div className={styles.orbitContainer}>
-                <div className={styles.outerOrbit}>
-                  <div className={styles.orbitCircle}></div>
-                </div>
+              <h4 className="p-2">Orbital Period: {planet?.orbital_period}</h4>
+              <div className={styles.outerOrbit}>
+                <div className={styles.orbitCircle}></div>
               </div>
             </div>
           </div>
           <div className="col">
-            <h3 className="textLg">
-              Rotation Period: {planet?.rotation_period}
-            </h3>
-            <div className={styles.sphere}></div>
-          </div>
-          <div className="row">
-            {/* <Image
-              src="/images/Star-Wars-millennium-falcon-light-jump-virtual-background.jpg"
-              width={1280}
-              height={720}
-              alt="cockpit"
-            /> */}
+            <div className={styles.orbitalWrapper}>
+              <h4 className="p-2">
+                Rotation Period: {planet?.rotation_period}
+              </h4>
+              <div className={styles.sphere}></div>
+            </div>
           </div>
         </div>
       </div>

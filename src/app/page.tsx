@@ -17,8 +17,6 @@ export default function Home() {
   const [filteredItems, setFilteredItems] = useState<Array<Planets>>([]);
   const [featured, setFeatured] = useState<Array<Planets>>([]);
 
-  const url = "https://swapi.dev/api/planets";
-
   const getRandomIcon = () => {
     const icons = Object.values(Icons);
     const randomIndex = Math.floor(Math.random() * icons.length);
@@ -71,8 +69,10 @@ export default function Home() {
 
   return (
     <div>
-      <div className={styles.homebanner}>
-        <h1 style={{ color: "white", marginTop: 0 }}>The Planets Of:</h1>
+      <div className={styles.homeHero}>
+        <h4 className="mb-1" style={{ color: "white", marginTop: 0 }}>
+          The Planets Of:
+        </h4>
         <Image
           src="/images/star-wars-logo.svg"
           width={500}
@@ -80,19 +80,16 @@ export default function Home() {
           alt="Star Wars logo"
         />
       </div>
-      <div className={styles.homeContent}>
-        <div
-          className="row"
-          style={{ marginTop: "1rem", marginBottom: "1rem" }}
-        >
-          <h1 style={{ color: vars.yellow, textAlign: "center", margin: "0" }}>
-            Featured Planets
-          </h1>
+      <div className="pageContent pt-2 pb-2">
+        <h3 style={{ color: vars.yellow, textAlign: "center", margin: "0" }}>
+          Featured Planets
+        </h3>
+        <div className="row">
           {featured.map((planet) => (
             <div className="col" key={planet.name}>
-              <div className={styles.featuredPlanet}>
-                <div className="flexObjectHorizontal">
-                  <div>
+              <div className={`${styles.featuredPlanet} p-1 m-1`}>
+                <div className="flex">
+                  <div className="p-1">
                     <Image
                       className={styles.planetImg}
                       src={"/images/planets/" + planet.name + ".png"}
@@ -101,33 +98,35 @@ export default function Home() {
                       alt={planet.name}
                     />
                   </div>
-                  <div className={styles.featuredPlanetText}>
-                    <h2>{planet.name}</h2>
-                    <span className="block">
+                  <div className="p-1">
+                    <h5>{planet.name}</h5>
+                    <p>
                       <span className="label">Rotation Period: </span>
                       {planet.rotation_period}
-                    </span>
-                    <span className="block">
+                    </p>
+                    <p>
                       <span className="label">Orbital Period: </span>
                       {planet.orbital_period}
-                    </span>
-                    <span className="block">
+                    </p>
+                    <p>
                       <span className="label">Terrain: </span>
                       {planet.terrain}
-                    </span>
-                    <span className="block">
+                    </p>
+                    <p>
                       <span className="label">Climate: </span>
                       {planet.climate}
-                    </span>
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
           ))}
         </div>
-        <div className="row" key="search">
-          <div className={styles.planetsSearch}>
-            <h1 style={{ color: vars.yellow }}>All Planets (A to Z)</h1>
+        <div className="row fw-400 mt-2">
+          <div className={styles.planetSearch}>
+            <h3 className="mb-1" style={{ color: vars.yellow }}>
+              All Planets (A to Z)
+            </h3>
             <input
               className={styles.searchBar}
               type="text"
@@ -146,7 +145,6 @@ export default function Home() {
                   className={styles.planetChip}
                   href={`/planet-detail/${planet.name}`}
                 >
-                  {planet.name}
                   <Image
                     className={styles.planetChipIcon}
                     src={getRandomIcon()}
@@ -154,6 +152,7 @@ export default function Home() {
                     height={36}
                     alt="Star Wars Icon"
                   />
+                  <h6>{planet.name}</h6>
                 </Link>
               </div>
             ))}

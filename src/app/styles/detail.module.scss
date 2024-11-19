@@ -1,49 +1,46 @@
-@import "variables.module.scss";
+@use "mixins/_flex.scss" as flex;
+@use "mixins/images" as images;
+@use "variables.module.scss" as vars;
 
-.detailContent {
-  background-color: $galaxy;
-  color: $yellow;
-  height: 100vh;
-  padding: 4rem;
-}
+.topBar {
+  background-color: black;
 
-.planetDetailCover {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: url("/images/hyperdrive.jpeg");
-  background-size: cover;
-  width: 100%;
-  height: 70vh;
-  color: $yellow;
-  text-align: center;
-
-  h1 {
-    font-size: 4rem;
+  .backArrow:hover {
+    cursor: pointer
   }
 }
 
+.planetDetailCover {
+  @include flex.flexColumn;
+  @include flex.justifyCenterAlignCenter;
+  @include images.heroImg;
+  background: url("/images/hyperdrive.jpeg");
+  color: vars.$yellow;
+  text-align: center;
+}
+
 .climateTerrain {
-  padding: 1rem;
-  margin: 1rem;
-  border: 0.12rem solid $blue;
+  @include flex.flexWrap;
+  @include flex.justifyBetweenAlignCenter;
+  border: 0.12rem solid vars.$blue;
   border-radius: 1rem;
   color: white;
-  font-size: 1rem;
+
+  .climateTerrainIcon {
+    margin: 0 0.75rem 0.75rem 0;
+  }
 
   h2 {
-    color: $blue;
+    color: vars.$blue;
+    margin: auto 0.75rem auto auto;
   }
 }
 
 // ORBIT ANIMATION
 .orbitalWrapper {
+  @include flex.flexColumn;
+  @include flex.justifyCenterAlignCenter;
   padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 @keyframes spin {
@@ -55,24 +52,19 @@
   }
 }
 
-.orbitContainer {
-  display: flex;
-  justify-content: center;
-}
-
 .orbitCircle {
   position: absolute;
   left: 4.7rem;
   width: 2rem;
   height: 2rem;
-  background-color: $orange;
+  background-color: vars.$orange;
   border-radius: 100%;
 }
 
 .outerOrbit {
   width: 20rem;
   height: 20rem;
-  border: 0.12rem dotted $orange;
+  border: 0.12rem dotted vars.$orange;
   border-radius: 100%;
   -webkit-animation: spin-right 20s linear infinite;
   animation: spin-right 20s linear infinite;
@@ -91,7 +83,7 @@
 // ROTATION ANIMATION
 .sphere {
   animation: spin 8s linear infinite;
-  border: 0.12rem dotted $orange;
+  border: 0.12rem dotted vars.$orange;
   border-radius: 50%;
   height: 20rem;
   width: 20rem;
@@ -99,7 +91,7 @@
 }
 .sphere::before,
 .sphere::after {
-  border: 0.12rem dashed $orange;
+  border: 0.12rem dashed vars.$orange;
   border-radius: 50%;
   content: "";
   height: 20rem;

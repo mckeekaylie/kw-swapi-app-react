@@ -1,0 +1,85 @@
+@mixin flex {
+  display: flex;
+}
+
+.flex {
+  @include flex;
+}
+
+@mixin flexWrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flexWrap {
+  @include flexWrap;
+}
+
+@mixin flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin justifyCenterAlignCenter {
+  justify-content: center;
+  align-items: center;
+}
+
+.justifyCenterAlignCenter {
+  @include justifyCenterAlignCenter;
+}
+
+@mixin justifyEndAlignCenter {
+  justify-content: end;
+  align-items: center;
+}
+
+@mixin justifyEvenlyAlignCenter {
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.justifyEvenlyAlignCenter {
+  @include justifyEvenlyAlignCenter;
+}
+
+@mixin justifyBetweenAlignCenter {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.justifyBetweenAlignCenter {
+  @include justifyBetweenAlignCenter;
+}
+
+/* GRID */
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1200px) {
+  .col {
+    flex: 1 1 30%;
+  }
+}
+
+@media (min-width: 842px) and (max-width: 1199.99px) {
+  .col {
+    flex: 1 1 50%;
+  }
+}
+
+@media (max-width: 841px) {
+  .row {
+    display: block;
+  }
+}

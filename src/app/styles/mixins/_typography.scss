@@ -1,0 +1,39 @@
+/* TYPOGRAPHY */
+@function toRem($value) {
+  $remValue: ($value / 16) + rem;
+  @return $remValue;
+}
+
+@mixin fontSize {
+  $headerTypes: h6 h5 h4 h3 h2 h1;
+  $base-font: 16;
+  $modular-scale: 1.25;
+
+  @each $type in $headerTypes {
+    #{$type} {
+      font-size: toRem($base-font * $modular-scale);
+      margin: 0;
+      $modular-scale: $modular-scale + 1;
+    }
+  }
+
+  p {
+    font-size: toRem($base-font);
+    margin: 0;
+  }
+}
+
+@mixin fontWeight() {
+  $weights: 400, 500, 600;
+
+  @each $weight in $weights {
+    .fw-#{$weight} {
+      font-weight: $weight;
+    }
+  }
+}
+
+.label {
+  font-weight: 600;
+  margin-right: 0.15rem;
+}
