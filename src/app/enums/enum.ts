@@ -15,3 +15,10 @@ export enum Icons {
   JediOrder = "/images/icons/jedi-order.svg",
   LightSaber = "/images/icons/light-saber.svg",
 }
+
+export enum PlanetSectors {
+  OuterRim = "Outer Rim",
+  MidRim = "Mid Rim",
+  InnerRim = "Inner Rim",
+  CoreWorlds = "Core Worlds",
+}

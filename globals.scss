@@ -2,7 +2,21 @@
   margin: 0;
 }
 
+/* TYPOGRAPHY */
+.textLg {
+  font-size: 1.6rem;
+}
+
+.text-md {
+  font-size: 1rem;
+}
+
 /* FLEX */
+
+.d-flex {
+  display: flex;
+}
+
 .row {
   display: flex;
   flex-wrap: wrap;
