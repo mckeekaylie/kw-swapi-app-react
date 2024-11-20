@@ -6,11 +6,13 @@ import { Planets } from "@/app/interfaces/planets";
 import styles from "../../styles/detail.module.scss";
 import Image from "next/image";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
 export default function PlanetDetail({ params }) {
   const { data, isLoading, isValidating } = getPlanets();
 
   const [planet, setPlanet] = useState<Planets>();
+  const planetParam = useParams<{ planet: string }>();
 
   useEffect(() => {
     let planetsContainer: Planets[] = [];
@@ -23,7 +25,7 @@ export default function PlanetDetail({ params }) {
       }
 
       const activePlanet = planetsContainer.find(
-        (x) => x.name === params.planet
+        (x) => x.name === decodeURIComponent(planetParam.planet)
       );
 
       setPlanet(activePlanet);

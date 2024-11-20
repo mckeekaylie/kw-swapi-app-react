@@ -6,7 +6,7 @@
   background-color: black;
 
   .backArrow:hover {
-    cursor: pointer
+    cursor: pointer;
   }
 }
 
@@ -14,6 +14,7 @@
   @include flex.flexColumn;
   @include flex.justifyCenterAlignCenter;
   @include images.heroImg;
+  // image is from alamy.com, individual license
   background: url("/images/hyperdrive.jpeg");
   color: vars.$yellow;
   text-align: center;

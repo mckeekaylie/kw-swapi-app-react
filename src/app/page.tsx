@@ -64,7 +64,19 @@ export default function Home() {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className={styles.loadingScreen}>
+        <Link href="https://icons8.com/icon/A5m8pfz5UiSL/star-wars-naboo-ship">
+          <Image
+            className={styles.loaderSvg}
+            src="/images/icons/starfighter.svg"
+            width={120}
+            height={120}
+            alt="Star Wars Naboo Ship icon by Icons8"
+          />
+        </Link>
+      </div>
+    );
   }
 
   return (
@@ -73,12 +85,12 @@ export default function Home() {
         <h4 className="mb-1" style={{ color: "white", marginTop: 0 }}>
           The Planets Of:
         </h4>
-        <Image
-          src="/images/star-wars-logo.svg"
-          width={500}
-          height={200}
-          alt="Star Wars logo"
-        />
+          <Image
+            src="/images/star-wars-logo.svg"
+            width={500}
+            height={200}
+            alt="Star Wars logo from worldvectorlogo.com"
+          />
       </div>
       <div className="pageContent pt-2 pb-2">
         <h3 style={{ color: vars.yellow, textAlign: "center", margin: "0" }}>
@@ -95,7 +107,7 @@ export default function Home() {
                       src={"/images/planets/" + planet.name + ".png"}
                       width={200}
                       height={200}
-                      alt={planet.name}
+                      alt={planet.name + "from starwars.fandom.com"}
                     />
                   </div>
                   <div className="p-1">
@@ -150,7 +162,7 @@ export default function Home() {
                     src={getRandomIcon()}
                     width={36}
                     height={36}
-                    alt="Star Wars Icon"
+                    alt="Star Wars Icon from flaticon.com, Premium License"
                   />
                   <h6>{planet.name}</h6>
                 </Link>

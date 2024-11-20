@@ -2,10 +2,41 @@
 @use "mixins/_images.scss" as images;
 @use "variables.module.scss" as vars;
 
+/* LOADING SCREEN */
+.loadingScreen {
+  @include flex.flex;
+  @include flex.justifyStartAlignCenter;
+  @include images.heroImg;
+  // image is from Freepik, premium license
+  background: url("/images/bkgd-galaxy.jpg");
+  background-color: vars.$galaxy;
+  height: 100vh;
+}
+
+@keyframes loaderSvg-animate {
+  0% {
+    transform: translateX(10vw);
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.1;
+    transform: translateX(60vw);
+  }
+}
+
+.loaderSvg {
+  animation: loaderSvg-animate 2s linear infinite;
+}
+
+/* HOME PAGE */
 .homeHero {
   @include flex.flexColumn;
   @include flex.justifyCenterAlignCenter;
   @include images.heroImg;
+  // image is from Freepik, premium license
   background: url("/images/bkgd-galaxy.jpg");
 }
 
@@ -13,6 +44,7 @@
   @include flex.flexColumn;
   @include flex.justifyEndAlignCenter;
   @include images.heroImg;
+  // image is from wallpapers.com, by usnlady205
   background: url("/images/deathStarBattle.jpg");
   background-position: center;
 }
@@ -20,8 +52,6 @@
 .featuredPlanet {
   @include flex.flex;
   @include flex.justifyBetweenAlignCenter;
-  padding: 1rem;
-  margin: 1rem;
   height: 12rem;
   border: 0.25rem solid vars.$blue;
   border-radius: 1rem;

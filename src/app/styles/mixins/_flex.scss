@@ -29,6 +29,11 @@
   @include justifyCenterAlignCenter;
 }
 
+@mixin justifyStartAlignCenter {
+  justify-content: start;
+  align-items: center;
+}
+
 @mixin justifyEndAlignCenter {
   justify-content: end;
   align-items: center;

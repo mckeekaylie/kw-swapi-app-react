@@ -9,6 +9,9 @@ const oxanium = Oxanium({ subsets: ["latin"], weight: ["400", "500", "600"] });
 export const metadata: Metadata = {
   title: "The Planets of Star Wars",
   description: "View and search for any planet in the galaxy!",
+  icons: {
+    icon: "/images/icons/custom-favicon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -18,6 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
       <body className={oxanium.className + " " + "body"}>{children}</body>
     </html>
   );
