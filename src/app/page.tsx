@@ -9,13 +9,18 @@ import styles from "./styles/home.module.scss";
 import vars from "./styles/variables.module.scss";
 import Link from "next/link";
 import { GetPlanets } from "./hooks/getPlanets";
+import ErrorScreen from "./components/error";
+import LoadingScreen from "./components/loading";
 
 export default function Home() {
-  const { data, isLoading, isValidating } = GetPlanets();
+  const { data, error, isLoading, isValidating } = GetPlanets();
 
   const [items, setItems] = useState<Array<Planets>>([]);
   const [filteredItems, setFilteredItems] = useState<Array<Planets>>([]);
   const [featured, setFeatured] = useState<Array<Planets>>([]);
+  const [planetChipsToShow, setPlanetChipsToShow] = useState(12);
+
+  const handleShowMore = () => setPlanetChipsToShow(planetChipsToShow + 10);
 
   const getRandomIcon = () => {
     const icons = Object.values(Icons);
@@ -64,19 +69,11 @@ export default function Home() {
   };
 
   if (isLoading) {
-    return (
-      <div className={styles.loadingScreen}>
-        <Link href="https://icons8.com/icon/A5m8pfz5UiSL/star-wars-naboo-ship">
-          <Image
-            className={styles.loaderSvg}
-            src="/images/icons/starfighter.svg"
-            width={120}
-            height={120}
-            alt="Star Wars Naboo Ship icon by Icons8"
-          />
-        </Link>
-      </div>
-    );
+    return <LoadingScreen />;
+  }
+
+  if (error) {
+    return <ErrorScreen />;
   }
 
   return (
@@ -86,6 +83,7 @@ export default function Home() {
           The Planets Of:
         </h4>
         <Image
+          className={styles.swLogo}
           src="/images/star-wars-logo.svg"
           width={500}
           height={200}
@@ -93,9 +91,12 @@ export default function Home() {
         />
       </div>
       <div className="pageContent pt-2 pb-2">
-        <h3 style={{ color: vars.yellow, textAlign: "center", margin: "0" }}>
+        <h1
+          className="mb-1"
+          style={{ color: vars.yellow, textAlign: "center" }}
+        >
           Featured Planets
-        </h3>
+        </h1>
         <div className="row">
           {featured.map((planet) => (
             <div className="col" key={planet.name}>
@@ -111,7 +112,7 @@ export default function Home() {
                     />
                   </div>
                   <div className="p-1">
-                    <h5>{planet.name}</h5>
+                    <h5 className="mb-1">{planet.name}</h5>
                     <p>
                       <span className="label">Rotation Period: </span>
                       {planet.rotation_period}
@@ -136,9 +137,9 @@ export default function Home() {
         </div>
         <div className="row fw-400 mt-2">
           <div className={styles.planetSearch}>
-            <h3 className="mb-1" style={{ color: vars.yellow }}>
-              All Planets (A to Z)
-            </h3>
+            <h1 className="mb-1" style={{ color: vars.yellow }}>
+              All Planets
+            </h1>
             <input
               className={styles.searchBar}
               type="text"
@@ -149,9 +150,9 @@ export default function Home() {
             ></input>
           </div>
         </div>
-        <div className="row">
+        <div className="flexColumn justifyCenterAlignCenter">
           <div className={styles.planetChipsWrapper} key="chips">
-            {filteredItems.map((planet) => (
+            {filteredItems.slice(0, planetChipsToShow).map((planet) => (
               <div key={planet.name}>
                 <Link
                   className={styles.planetChip}
@@ -164,11 +165,16 @@ export default function Home() {
                     height={36}
                     alt="Star Wars Icon from flaticon.com, Premium License"
                   />
-                  <h6>{planet.name}</h6>
+                  <p className="bigger">{planet.name}</p>
                 </Link>
               </div>
             ))}
           </div>
+          {planetChipsToShow < filteredItems.length && (
+            <button className={styles.moreLessBtn} onClick={handleShowMore}>
+              Show more
+            </button>
+          )}
         </div>
       </div>
     </div>

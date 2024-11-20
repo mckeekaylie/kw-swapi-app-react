@@ -2,35 +2,6 @@
 @use "mixins/_images.scss" as images;
 @use "variables.module.scss" as vars;
 
-/* LOADING SCREEN */
-.loadingScreen {
-  @include flex.flex;
-  @include flex.justifyStartAlignCenter;
-  @include images.heroImg;
-  // image is from Freepik, premium license
-  background: url("/images/bkgd-galaxy.jpg");
-  background-color: vars.$galaxy;
-  height: 100vh;
-}
-
-@keyframes loaderSvg-animate {
-  0% {
-    transform: translateX(10vw);
-    opacity: 0.1;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.1;
-    transform: translateX(60vw);
-  }
-}
-
-.loaderSvg {
-  animation: loaderSvg-animate 2s linear infinite;
-}
-
 /* HOME PAGE */
 .homeHero {
   @include flex.flexColumn;
@@ -38,6 +9,10 @@
   @include images.heroImg;
   // image is from Freepik, premium license
   background: url("/images/bkgd-galaxy.jpg");
+}
+
+.swLogo {
+  max-width: 80%;
 }
 
 .planetSearch {
@@ -52,7 +27,6 @@
 .featuredPlanet {
   @include flex.flex;
   @include flex.justifyBetweenAlignCenter;
-  height: 12rem;
   border: 0.25rem solid vars.$blue;
   border-radius: 1rem;
   color: white;
@@ -103,11 +77,40 @@
 .searchBar {
   background-color: white;
   color: vars.$galaxy;
-  width: 50%;
   padding: 1rem;
   border: none;
   border-radius: 10rem;
-  margin-left: 4rem;
-  margin-right: 4rem;
   margin-bottom: 2rem;
+}
+
+.moreLessBtn {
+  background-color: vars.$blue;
+  color: white;
+  margin-top: 2rem;
+  padding: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-family: "Oxanium";
+}
+
+.moreLessBtn:hover {
+  background-color: vars.$yellow;
+}
+
+@media (min-width: 992px) {
+  .featuredPlanet {
+    height: 12rem;
+  }
+
+  .searchBar {
+    width: 50%;
+    margin-left: 4rem;
+    margin-right: 4rem;
+  }
+}
+
+@media (max-width: 991.99px) {
+  .searchBar {
+    width: 80%;
+  }
 }

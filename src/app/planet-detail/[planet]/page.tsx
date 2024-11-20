@@ -7,9 +7,11 @@ import styles from "../../styles/detail.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import LoadingScreen from "@/app/components/loading";
+import ErrorScreen from "@/app/components/error";
 
 export default function PlanetDetail() {
-  const { data, isLoading } = GetPlanets();
+  const { data, error, isLoading } = GetPlanets();
 
   const [planet, setPlanet] = useState<Planets>();
   const planetParam = useParams<{ planet: string }>();
@@ -27,13 +29,17 @@ export default function PlanetDetail() {
       const activePlanet = planetsContainer.find(
         (x) => x.name === decodeURIComponent(planetParam.planet)
       );
-
+      console.log(activePlanet);
       setPlanet(activePlanet);
     }
   }, [data, planetParam.planet]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingScreen />;
+  }
+
+  if (error) {
+    return <ErrorScreen />;
   }
 
   return (
@@ -51,18 +57,18 @@ export default function PlanetDetail() {
       </div>
       <div className={styles.planetDetailCover}>
         <div>
-          <h1 className="mb-1">{planet?.name}</h1>
-          <div className="flex justifyBetweenAlignCenter">
-            <h5 className="pr-2">
+          <h1 className="mb-2">{planet?.name}</h1>
+          <div className={styles.infoBelowPlanetName}>
+            <h6>
               Diameter: <span className="fw-400">{planet?.diameter}</span>
-            </h5>
-            <h5 className="pr-2">
+            </h6>
+            <h6>
               Gravity: <span className="fw-400">{planet?.gravity}</span>
-            </h5>
-            <h5 className="pr-2">
+            </h6>
+            <h6>
               Surface Water:{" "}
               <span className="fw-400">{planet?.surface_water}</span>
-            </h5>
+            </h6>
           </div>
         </div>
       </div>
@@ -70,32 +76,54 @@ export default function PlanetDetail() {
         <div className="row">
           <div className="col">
             <div className={`${styles.climateTerrain} p-1 m-1`}>
-              <div className="flex justifyCenterAlignCenter">
-                <Image
-                  className={styles.climateTerrainIcon}
-                  src="/images/icons/climate.svg"
-                  width={56}
-                  height={56}
-                  alt="Climate icon"
-                />
-                <h5>Climate</h5>
+              <div className={styles.imgTextWrapper}>
+                <div>
+                  <Image
+                    className={styles.climateTerrainIcon}
+                    src="/images/icons/climate.svg"
+                    width={62}
+                    height={62}
+                    alt="Climate icon"
+                  />
+                </div>
+                <div className={styles.textWrapper}>
+                  <h6>Climate</h6>
+                  <h6 className="fw-300">
+                    {planet?.climate.split(",").map((word, index) => (
+                      <span key={index}>
+                        {word}
+                        <br />
+                      </span>
+                    ))}
+                  </h6>
+                </div>
               </div>
-              <h5 className="fw-400">{planet?.climate}</h5>
             </div>
           </div>
           <div className="col">
             <div className={`${styles.climateTerrain} p-1 m-1`}>
-              <div className="flex justifyCenterAlignCenter">
-                <Image
-                  className={styles.climateTerrainIcon}
-                  src="/images/icons/terrain.svg"
-                  width={54}
-                  height={54}
-                  alt="Terrain icon"
-                />
-                <h5>Terrain</h5>
+              <div className={styles.imgTextWrapper}>
+                <div>
+                  <Image
+                    className={styles.climateTerrainIcon}
+                    src="/images/icons/terrain.svg"
+                    width={62}
+                    height={62}
+                    alt="Terrain icon"
+                  />
+                </div>
+                <div className={styles.textWrapper}>
+                  <h6>Terrain</h6>
+                  <h6 className="fw-300">
+                    {planet?.terrain.split(",").map((word, index) => (
+                      <span key={index}>
+                        {word}
+                        <br />
+                      </span>
+                    ))}
+                  </h6>
+                </div>
               </div>
-              <h5 className="fw-400">{planet?.terrain}</h5>
             </div>
           </div>
         </div>

@@ -1,0 +1,60 @@
+@use "mixins/_flex.scss" as flex;
+@use "mixins/_images.scss" as images;
+@use "variables.module.scss" as vars;
+
+.loadingScreen,
+.errorScreen {
+  @include flex.flex;
+  @include images.heroImg;
+  // image is from Freepik, premium license
+  background: url("/images/bkgd-galaxy.jpg");
+  background-color: vars.$galaxy;
+  height: 100vh;
+}
+
+/* LOADING SCREEN */
+.loadingScreen {
+  @include flex.justifyStartAlignCenter;
+}
+
+@keyframes loaderSvg-animate {
+  0% {
+    transform: translateX(10vw);
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.1;
+    transform: translateX(60vw);
+  }
+}
+
+.loaderSvg {
+  animation: loaderSvg-animate 2s linear infinite;
+}
+
+/* ERROR SCREEN */
+.errorScreen {
+  @include flex.justifyCenterAlignCenter;
+  flex-direction: column;
+  color: vars.$yellow;
+
+  .errorScreenContent {
+    text-align: center;
+  }
+}
+
+/* MEDIA QUERIES */
+@media (min-width: 992px) {
+  .errorScreenContent {
+    width: 50%;
+  }
+}
+
+@media (max-width: 991.99px) {
+  .errorScreenContent {
+    padding: 2rem;
+  }
+}

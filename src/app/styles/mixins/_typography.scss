@@ -1,4 +1,13 @@
 /* TYPOGRAPHY */
+:root {
+  @media (min-width: 768px) {
+    --base-font: 16;
+  }
+  @media (max-width: 767.99px) {
+    --base-font: 14;
+  }
+}
+
 @function toRem($value) {
   $remValue: ($value / 16) + rem;
   @return $remValue;
@@ -6,25 +15,55 @@
 
 @mixin fontSize {
   $headerTypes: h6 h5 h4 h3 h2 h1;
-  $base-font: 16;
-  $modular-scale: 1.25;
 
   @each $type in $headerTypes {
     #{$type} {
-      font-size: toRem($base-font * $modular-scale);
       margin: 0;
-      $modular-scale: $modular-scale + 1;
+    }
+
+    @if $type == h1 {
+      #{$type} {
+        font-size: clamp(2.75rem, 4vw + 0.5rem, 3.25rem);
+      }
+    } @else if $type == h2 {
+      #{$type} {
+        font-size: clamp(2.5rem, 4vw + 0.5rem, 3rem);
+      }
+    } @else if $type == h3 {
+      #{$type} {
+        font-size: clamp(2.25rem, 4vw + 0.5rem, 2.75rem);
+      }
+    } @else if $type == h4 {
+      #{$type} {
+        font-size: clamp(2rem, 4vw + 0.5rem, 2.5rem);
+      }
+    } @else if $type == h5 {
+      #{$type} {
+        font-size: clamp(1.75rem, 4vw + 0.5rem, 2.25rem);
+      }
+    } @else {
+      #{$type} {
+        font-size: clamp(1.5rem, 4vw + 0.5rem, 2rem);
+      }
     }
   }
 
+  p,
+  button {
+    font-size: clamp(1rem, 4vw + 0.125rem, 1.125rem);
+  }
+
   p {
-    font-size: toRem($base-font);
     margin: 0;
+  }
+
+  .bigger {
+    font-size: clamp(1.25rem, 4vw + 0.25rem, 1.5rem);
   }
 }
 
 @mixin fontWeight() {
-  $weights: 400, 500, 600;
+  $weights: 300, 400, 500, 600;
 
   @each $weight in $weights {
     .fw-#{$weight} {

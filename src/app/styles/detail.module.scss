@@ -22,18 +22,24 @@
 
 .climateTerrain {
   @include flex.flexWrap;
-  @include flex.justifyBetweenAlignCenter;
   border: 0.12rem solid vars.$blue;
   border-radius: 1rem;
   color: white;
 
-  .climateTerrainIcon {
-    margin: 0 0.75rem 0.75rem 0;
-  }
-
   h2 {
     color: vars.$blue;
     margin: auto 0.75rem auto auto;
+  }
+
+  .imgTextWrapper {
+    @include flex.flex;
+    align-items: center;
+    width: 100%;
+    padding: 0 1rem;
+
+    .textWrapper {
+      width: 100%;
+    }
   }
 }
 
@@ -116,5 +122,45 @@
   }
   100% {
     transform: rotateY(360deg);
+  }
+}
+
+@media (min-width: 568px) {
+  .infoBelowPlanetName {
+    @include flex.flex;
+    @include flex.justifyCenterAlignCenter;
+
+    h6 {
+      padding-right: 2rem;
+    }
+
+    h6:nth-child(3) {
+      padding-right: 0;
+    }
+  }
+
+  .climateTerrain {
+    .textWrapper {
+      @include flex.flex;
+      @include flex.justifyBetweenAlignCenter;
+
+      h6:nth-child(1) {
+        margin-left: 1rem;
+      }
+
+      h6:nth-child(2) {
+        text-align: right;
+      }
+    }
+    height: 100%;
+  }
+}
+
+@media (max-width: 567.99px) {
+  .climateTerrain {
+    .textWrapper {
+      @include flex.flexColumn;
+      padding: 1rem;
+    }
   }
 }
