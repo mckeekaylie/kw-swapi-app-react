@@ -1,6 +1,6 @@
 "use client";
 
-import { getPlanets } from "@/app/hooks/getPlanets";
+import { GetPlanets } from "@/app/hooks/getPlanets";
 import { useEffect, useState } from "react";
 import { Planets } from "@/app/interfaces/planets";
 import styles from "../../styles/detail.module.scss";
@@ -8,14 +8,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
-export default function PlanetDetail({ params }) {
-  const { data, isLoading, isValidating } = getPlanets();
+export default function PlanetDetail() {
+  const { data, isLoading } = GetPlanets();
 
   const [planet, setPlanet] = useState<Planets>();
   const planetParam = useParams<{ planet: string }>();
 
   useEffect(() => {
-    let planetsContainer: Planets[] = [];
+    const planetsContainer: Planets[] = [];
 
     if (data && data.length !== undefined) {
       for (let i = 0; i <= data.length; i++) {
@@ -30,7 +30,7 @@ export default function PlanetDetail({ params }) {
 
       setPlanet(activePlanet);
     }
-  }, [data]);
+  }, [data, planetParam.planet]);
 
   if (isLoading) {
     return <div>Loading...</div>;

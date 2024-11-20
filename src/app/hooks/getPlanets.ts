@@ -11,14 +11,14 @@ function multiFetcher(urls): Promise<PlanetRes[]> {
   return Promise.all(urls.map((url) => fetcher(url)));
 }
 
-export function getPlanets() {
-  let urls: string[] = [];
+export function GetPlanets() {
+  const urls: string[] = [];
 
   for (let i = 1; i <= 6; i++) {
     urls.push(`${url}?page=${i}`);
   }
 
-  const { data, error, isLoading, isValidating } = useSWR<PlanetRes[]>(
+  const { data, isLoading, isValidating } = useSWR<PlanetRes[]>(
     urls,
     multiFetcher
   );

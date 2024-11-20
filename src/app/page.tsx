@@ -8,12 +8,12 @@ import Image from "next/image";
 import styles from "./styles/home.module.scss";
 import vars from "./styles/variables.module.scss";
 import Link from "next/link";
-import { getPlanets } from "./hooks/getPlanets";
+import { GetPlanets } from "./hooks/getPlanets";
 
 export default function Home() {
-  const { data, isLoading, isValidating } = getPlanets();
+  const { data, isLoading, isValidating } = GetPlanets();
 
-  const [items, setItems] = useState<Array<any>>([]);
+  const [items, setItems] = useState<Array<Planets>>([]);
   const [filteredItems, setFilteredItems] = useState<Array<Planets>>([]);
   const [featured, setFeatured] = useState<Array<Planets>>([]);
 
@@ -25,7 +25,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!isLoading && !isValidating) {
-      let planetsContainer: Planets[] = [];
+      const planetsContainer: Planets[] = [];
 
       if (data && data.length !== undefined) {
         for (let i = 0; i <= data.length; i++) {
@@ -48,7 +48,7 @@ export default function Home() {
       setFilteredItems(resultsAbc);
       setFeatured(featuredPlanets);
     }
-  }, [data]);
+  }, [data, isLoading, isValidating]);
 
   const [inputValue, setValue] = useState("");
 
@@ -85,12 +85,12 @@ export default function Home() {
         <h4 className="mb-1" style={{ color: "white", marginTop: 0 }}>
           The Planets Of:
         </h4>
-          <Image
-            src="/images/star-wars-logo.svg"
-            width={500}
-            height={200}
-            alt="Star Wars logo from worldvectorlogo.com"
-          />
+        <Image
+          src="/images/star-wars-logo.svg"
+          width={500}
+          height={200}
+          alt="Star Wars logo from worldvectorlogo.com"
+        />
       </div>
       <div className="pageContent pt-2 pb-2">
         <h3 style={{ color: vars.yellow, textAlign: "center", margin: "0" }}>
