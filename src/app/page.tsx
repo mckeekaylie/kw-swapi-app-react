@@ -99,7 +99,11 @@ export default function Home() {
         </h1>
         <div className="row">
           {featured.map((planet) => (
-            <div className="col" key={planet.name}>
+            <div
+              className="col"
+              key={planet.name}
+              data-testid={`${planet.name}-feature-card`}
+            >
               <div className={`${styles.featuredPlanet} p-1 m-1`}>
                 <div className="flex">
                   <div className="p-1">
@@ -153,7 +157,7 @@ export default function Home() {
         <div className="flexColumn justifyCenterAlignCenter">
           <div className={styles.planetChipsWrapper} key="chips">
             {filteredItems.slice(0, planetChipsToShow).map((planet) => (
-              <div key={planet.name}>
+              <div key={planet.name} data-testid="planetChip">
                 <Link
                   className={styles.planetChip}
                   href={`/planet-detail/${planet.name}`}

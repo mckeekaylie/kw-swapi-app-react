@@ -3,7 +3,7 @@ import styles from "../styles/loading-error.module.scss";
 
 export default function ErrorScreen() {
   return (
-    <div className={styles.errorScreen}>
+    <div className={styles.errorScreen} data-testid="errorScreen">
       <div className={styles.errorScreenContent}>
         <h1>A grievous mistake occurred while fetching data.</h1>
         <Image

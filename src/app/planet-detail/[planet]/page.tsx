@@ -29,7 +29,6 @@ export default function PlanetDetail() {
       const activePlanet = planetsContainer.find(
         (x) => x.name === decodeURIComponent(planetParam.planet)
       );
-      console.log(activePlanet);
       setPlanet(activePlanet);
     }
   }, [data, planetParam.planet]);
@@ -59,13 +58,13 @@ export default function PlanetDetail() {
         <div>
           <h1 className="mb-2">{planet?.name}</h1>
           <div className={styles.infoBelowPlanetName}>
-            <h6>
+            <h6 data-testid="diameter">
               Diameter: <span className="fw-400">{planet?.diameter}</span>
             </h6>
-            <h6>
+            <h6 data-testid="gravity">
               Gravity: <span className="fw-400">{planet?.gravity}</span>
             </h6>
-            <h6>
+            <h6 data-testid="surfaceWater">
               Surface Water:{" "}
               <span className="fw-400">{planet?.surface_water}</span>
             </h6>
@@ -88,7 +87,7 @@ export default function PlanetDetail() {
                 </div>
                 <div className={styles.textWrapper}>
                   <h6>Climate</h6>
-                  <h6 className="fw-300">
+                  <h6 className="fw-300" data-testid="climate">
                     {planet?.climate.split(",").map((word, index) => (
                       <span key={index}>
                         {word}
@@ -114,7 +113,7 @@ export default function PlanetDetail() {
                 </div>
                 <div className={styles.textWrapper}>
                   <h6>Terrain</h6>
-                  <h6 className="fw-300">
+                  <h6 className="fw-300" data-testid="terrain">
                     {planet?.terrain.split(",").map((word, index) => (
                       <span key={index}>
                         {word}
@@ -131,7 +130,9 @@ export default function PlanetDetail() {
         <div className="row">
           <div className="col">
             <div className={styles.orbitalWrapper}>
-              <h4 className="p-2">Orbital Period: {planet?.orbital_period}</h4>
+              <h4 className="p-2" data-testid="orbital">
+                Orbital Period: {planet?.orbital_period}
+              </h4>
               <div className={styles.outerOrbit}>
                 <div className={styles.orbitCircle}></div>
               </div>
@@ -139,7 +140,7 @@ export default function PlanetDetail() {
           </div>
           <div className="col">
             <div className={styles.orbitalWrapper}>
-              <h4 className="p-2">
+              <h4 className="p-2" data-testid="rotation">
                 Rotation Period: {planet?.rotation_period}
               </h4>
               <div className={styles.sphere}></div>

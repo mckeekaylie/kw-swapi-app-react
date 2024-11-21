@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function LoadingScreen() {
   return (
-    <div className={styles.loadingScreen}>
+    <div className={styles.loadingScreen} data-testid="loadingScreen">
       <Link href="https://icons8.com/icon/A5m8pfz5UiSL/star-wars-naboo-ship">
         <Image
           className={styles.loaderSvg}
