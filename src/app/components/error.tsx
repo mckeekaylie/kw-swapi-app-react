@@ -1,5 +1,5 @@
-import Image from "next/image";
 import styles from "../styles/loading-error.module.scss";
+import Image from "next/image";
 
 export default function ErrorScreen() {
   return (

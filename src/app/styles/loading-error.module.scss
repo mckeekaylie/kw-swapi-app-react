@@ -19,6 +19,10 @@
 
 @keyframes loaderSvg-animate {
   0% {
+    -webkit-transform: translateX(10vw);
+    -moz-transform: translateX(10vw);
+    -ms-transform: translateX(10vw);
+    -o-transform: translateX(10vw);
     transform: translateX(10vw);
     opacity: 0.1;
   }
@@ -27,6 +31,10 @@
   }
   100% {
     opacity: 0.1;
+    -webkit-transform: translateX(60vw);
+    -moz-transform: translateX(60vw);
+    -ms-transform: translateX(60vw);
+    -o-transform: translateX(60vw);
     transform: translateX(60vw);
   }
 }

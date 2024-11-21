@@ -2,7 +2,7 @@
 @use "mixins/_images.scss" as images;
 @use "variables.module.scss" as vars;
 
-/* HOME PAGE */
+/* HERO */
 .homeHero {
   @include flex.flexColumn;
   @include flex.justifyCenterAlignCenter;
@@ -15,15 +15,7 @@
   max-width: 80%;
 }
 
-.planetSearch {
-  @include flex.flexColumn;
-  @include flex.justifyEndAlignCenter;
-  @include images.heroImg;
-  // image is from wallpapers.com, by usnlady205
-  background: url("/images/deathStarBattle.jpg");
-  background-position: center;
-}
-
+/* FEATURED */
 .featuredPlanet {
   @include flex.flex;
   @include flex.justifyBetweenAlignCenter;
@@ -42,6 +34,25 @@
   border-radius: 50%;
   overflow: hidden;
   object-fit: cover;
+}
+
+/* ALL PLANETS */
+.planetSearch {
+  @include flex.flexColumn;
+  @include flex.justifyEndAlignCenter;
+  @include images.heroImg;
+  // image is from wallpapers.com, by usnlady205
+  background: url("/images/deathStarBattle.jpg");
+  background-position: center;
+}
+
+.searchBar {
+  background-color: white;
+  color: vars.$galaxy;
+  padding: 1rem;
+  border: none;
+  border-radius: 10rem;
+  margin-bottom: 2rem;
 }
 
 .planetChip {
@@ -70,17 +81,9 @@
 
 .planetChipsWrapper {
   @include flex.flexWrap;
-  @include flex.justifyCenterAlignCenter;
+  @include flex.justifyCenterAlignStart;
   padding: 0.5rem;
-}
-
-.searchBar {
-  background-color: white;
-  color: vars.$galaxy;
-  padding: 1rem;
-  border: none;
-  border-radius: 10rem;
-  margin-bottom: 2rem;
+  min-height: 20rem;
 }
 
 .moreLessBtn {
@@ -97,6 +100,7 @@
   background-color: vars.$yellow;
 }
 
+/* MEDIA QUERIES */
 @media (min-width: 992px) {
   .featuredPlanet {
     height: 12rem;

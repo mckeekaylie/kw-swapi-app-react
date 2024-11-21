@@ -1,5 +1,6 @@
-import Image from "next/image";
 import styles from "../styles/loading-error.module.scss";
+
+import Image from "next/image";
 import Link from "next/link";
 
 export default function LoadingScreen() {
@@ -7,6 +8,7 @@ export default function LoadingScreen() {
     <div className={styles.loadingScreen} data-testid="loadingScreen">
       <Link href="https://icons8.com/icon/A5m8pfz5UiSL/star-wars-naboo-ship">
         <Image
+          priority={true}
           className={styles.loaderSvg}
           src="/images/icons/starfighter.svg"
           width={120}

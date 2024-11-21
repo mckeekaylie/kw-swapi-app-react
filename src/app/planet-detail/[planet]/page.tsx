@@ -1,14 +1,25 @@
 "use client";
 
-import { GetPlanets } from "@/app/hooks/getPlanets";
-import { useEffect, useState } from "react";
-import { Planets } from "@/app/interfaces/planets";
-import styles from "../../styles/detail.module.scss";
+// COMPONENTS
+import ErrorScreen from "../../components/error";
+import LoadingScreen from "../../components/loading";
+
+// INTERFACES
+import { Planets } from "../../interfaces/planets";
+
+// HOOKS
+import { GetPlanets } from "../../hooks/getPlanets";
+
+// NEXT
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import LoadingScreen from "@/app/components/loading";
-import ErrorScreen from "@/app/components/error";
+
+// REACT
+import { useEffect, useState } from "react";
+
+// CUSTOM STYLES
+import styles from "../../styles/detail.module.scss";
 
 export default function PlanetDetail() {
   const { data, error, isLoading } = GetPlanets();
@@ -26,6 +37,7 @@ export default function PlanetDetail() {
         });
       }
 
+      // find the planet that matches the param passed via useParams, then store that planet as state variable planet
       const activePlanet = planetsContainer.find(
         (x) => x.name === decodeURIComponent(planetParam.planet)
       );
@@ -43,6 +55,7 @@ export default function PlanetDetail() {
 
   return (
     <div>
+      {/* Nav */}
       <div className={`${styles.topBar} p-1`}>
         <Link href={`/`}>
           <Image
@@ -54,6 +67,7 @@ export default function PlanetDetail() {
           />
         </Link>
       </div>
+      {/* Hero */}
       <div className={styles.planetDetailCover}>
         <div>
           <h1 className="mb-2">{planet?.name}</h1>
@@ -71,7 +85,9 @@ export default function PlanetDetail() {
           </div>
         </div>
       </div>
+      {/* Everything below the hero */}
       <div className="pageContent">
+        {/* Climate & Terrain */}
         <div className="row">
           <div className="col">
             <div className={`${styles.climateTerrain} p-1 m-1`}>
@@ -127,6 +143,7 @@ export default function PlanetDetail() {
           </div>
         </div>
         <div className="spacer"></div>
+        {/* Orbital Period & Rotation Period */}
         <div className="row">
           <div className="col">
             <div className={styles.orbitalWrapper}>

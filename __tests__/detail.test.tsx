@@ -1,7 +1,9 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
+
 import Detail from "../src/app/planet-detail/[planet]/page";
 import { GetPlanets } from "../src/app/hooks/getPlanets";
+
 import { useParams } from "next/navigation";
 
 // mock getPlanets hook response so Detail receives the data it needs to populate the page

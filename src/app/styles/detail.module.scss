@@ -96,6 +96,7 @@
   width: 20rem;
   transform-style: preserve-3d;
 }
+
 .sphere::before,
 .sphere::after {
   border: 0.12rem dashed vars.$orange;
@@ -118,13 +119,22 @@
 
 @keyframes spin {
   0% {
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
     transform: rotateY(0deg);
   }
   100% {
+    -webkit-transform: rotateY(360deg);
+    -moz-transform: rotateY(360deg);
+    -ms-transform: rotateY(360deg);
+    -o-transform: rotateY(360deg);
     transform: rotateY(360deg);
   }
 }
 
+/* MEDIA QUERIES */
 @media (min-width: 568px) {
   .infoBelowPlanetName {
     @include flex.flex;

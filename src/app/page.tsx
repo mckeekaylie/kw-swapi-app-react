@@ -1,37 +1,61 @@
 "use client";
 
-import { ChangeEvent, useEffect, useState } from "react";
-
-import { Featured, Icons } from "./enums/enum";
-import { Planets } from "./interfaces/planets";
-import Image from "next/image";
-import styles from "./styles/home.module.scss";
-import vars from "./styles/variables.module.scss";
-import Link from "next/link";
-import { GetPlanets } from "./hooks/getPlanets";
+// COMPONENTS
 import ErrorScreen from "./components/error";
 import LoadingScreen from "./components/loading";
+
+// ENUMS & INTERFACES
+import { Featured, Icons } from "./enums/enum";
+import { Planets } from "./interfaces/planets";
+
+// HOOKS
+import { GetPlanets } from "./hooks/getPlanets";
+
+// NEXT
+import Image from "next/image";
+import Link from "next/link";
+
+// REACT
+import { ChangeEvent, useEffect, useState } from "react";
+
+// CUSTOM STYLES
+import styles from "./styles/home.module.scss";
+import vars from "./styles/variables.module.scss";
 
 export default function Home() {
   const { data, error, isLoading, isValidating } = GetPlanets();
 
-  const [items, setItems] = useState<Array<Planets>>([]);
-  const [filteredItems, setFilteredItems] = useState<Array<Planets>>([]);
+  const [planets, setPlanets] = useState<Array<Planets>>([]);
+  const [sortedFilteredPlanets, setSortedFilteredPlanets] = useState<
+    Array<Planets>
+  >([]);
   const [featured, setFeatured] = useState<Array<Planets>>([]);
-  const [planetChipsToShow, setPlanetChipsToShow] = useState(12);
 
+  // show more button handling
+  const [planetChipsToShow, setPlanetChipsToShow] = useState(12);
   const handleShowMore = () => setPlanetChipsToShow(planetChipsToShow + 10);
 
-  const getRandomIcon = () => {
+  // display a random icon inside each planet chip
+  const getImageSrc = (index: number) => {
     const icons = Object.values(Icons);
-    const randomIndex = Math.floor(Math.random() * icons.length);
-    return icons[randomIndex];
+    if ((index + 1) % 5 === 0) {
+      return `/images/icons/${icons[4]}`;
+    } else if ((index + 1) % 4 === 0) {
+      return `/images/icons/${icons[3]}`;
+    } else if ((index + 1) % 3 === 0) {
+      return `/images/icons/${icons[2]}`;
+    } else if ((index + 1) % 2 === 0) {
+      return `/images/icons/${icons[1]}`;
+    } else {
+      return `/images/icons/${icons[0]}`;
+    }
   };
 
   useEffect(() => {
     if (!isLoading && !isValidating) {
       const planetsContainer: Planets[] = [];
 
+      // grab the results array inside the response object, push each result to planetsContainer
       if (data && data.length !== undefined) {
         for (let i = 0; i <= data.length; i++) {
           data[i]?.results.map((x) => {
@@ -40,17 +64,25 @@ export default function Home() {
         }
       }
 
+      /* populate the featured planet cards by filtering the planets received from the api 
+         by the designated featured planets (specifically, the values inside Featured enum) */
       const featuredPlanets = planetsContainer.filter((planet) => {
         const featuredEnumVals = Object.values(Featured) as Array<string>;
         return featuredEnumVals.includes(planet.name);
       });
 
+      // sort the planets received from the api alphabetically before populating the state variable
       const resultsAbc = planetsContainer.sort((a, b) => {
         return a["name"].localeCompare(b["name"]);
       });
 
-      setItems(planetsContainer);
-      setFilteredItems(resultsAbc);
+      // store the planets received from the api UNMODIFIED, for filtering purposes
+      setPlanets(planetsContainer);
+
+      // store the planets sorted in resultsAbc; this state variable populates the planet chips
+      setSortedFilteredPlanets(resultsAbc);
+
+      // store the featured planets returned by featuredPlanets; this state variable populates the featured planet cards
       setFeatured(featuredPlanets);
     }
   }, [data, isLoading, isValidating]);
@@ -61,11 +93,11 @@ export default function Home() {
     const inputValue = event.target.value;
     setValue(inputValue);
 
-    const filtered = items.filter((x) => {
+    const filtered = planets.filter((x) => {
       return x.name.toLowerCase().includes(inputValue.toLowerCase());
     });
 
-    setFilteredItems(filtered);
+    setSortedFilteredPlanets(filtered);
   };
 
   if (isLoading) {
@@ -78,6 +110,7 @@ export default function Home() {
 
   return (
     <div>
+      {/* Hero */}
       <div className={styles.homeHero}>
         <h4 className="mb-1" style={{ color: "white", marginTop: 0 }}>
           The Planets Of:
@@ -90,7 +123,9 @@ export default function Home() {
           alt="Star Wars logo from worldvectorlogo.com"
         />
       </div>
+      {/* Everything below the Hero */}
       <div className="pageContent pt-2 pb-2">
+        {/* Featured Planets */}
         <h1
           className="mb-1"
           style={{ color: vars.yellow, textAlign: "center" }}
@@ -139,6 +174,8 @@ export default function Home() {
             </div>
           ))}
         </div>
+        {/* All Planets (planet search)  */}
+        {/* Search input */}
         <div className="row fw-400 mt-2">
           <div className={styles.planetSearch}>
             <h1 className="mb-1" style={{ color: vars.yellow }}>
@@ -154,27 +191,31 @@ export default function Home() {
             ></input>
           </div>
         </div>
+        {/* Planet Chips */}
         <div className="flexColumn justifyCenterAlignCenter">
           <div className={styles.planetChipsWrapper} key="chips">
-            {filteredItems.slice(0, planetChipsToShow).map((planet) => (
-              <div key={planet.name} data-testid="planetChip">
-                <Link
-                  className={styles.planetChip}
-                  href={`/planet-detail/${planet.name}`}
-                >
-                  <Image
-                    className={styles.planetChipIcon}
-                    src={getRandomIcon()}
-                    width={36}
-                    height={36}
-                    alt="Star Wars Icon from flaticon.com, Premium License"
-                  />
-                  <p className="bigger">{planet.name}</p>
-                </Link>
-              </div>
-            ))}
+            {sortedFilteredPlanets
+              .slice(0, planetChipsToShow)
+              .map((planet, index) => (
+                <div key={planet.name} data-testid="planetChip">
+                  <Link
+                    className={styles.planetChip}
+                    href={`/planet-detail/${planet.name}`}
+                  >
+                    <Image
+                      className={styles.planetChipIcon}
+                      src={getImageSrc(index)}
+                      width={36}
+                      height={36}
+                      alt="Star Wars Icon from flaticon.com, Premium License"
+                    />
+                    <p className="bigger">{planet.name}</p>
+                  </Link>
+                </div>
+              ))}
           </div>
-          {planetChipsToShow < filteredItems.length && (
+          {/* Show more btn */}
+          {planetChipsToShow < sortedFilteredPlanets.length && (
             <button className={styles.moreLessBtn} onClick={handleShowMore}>
               Show more
             </button>

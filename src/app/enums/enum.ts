@@ -8,9 +8,9 @@ export enum Featured {
 }
 
 export enum Icons {
-  AtAtWalker = "/images/icons/at-at-walker.svg",
-  MillenniumFalcon = "/images/icons/millennium-falcon.svg",
-  XWing = "/images/icons/xwing.svg",
-  R2 = "/images/icons/r2.svg",
-  BobaFett = "/images/icons/boba-fett.svg",
+  AtAtWalker = "at-at-walker.svg",
+  MillenniumFalcon = "millennium-falcon.svg",
+  XWing = "xwing.svg",
+  R2 = "r2.svg",
+  BobaFett = "boba-fett.svg",
 }

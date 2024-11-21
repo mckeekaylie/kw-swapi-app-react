@@ -33,6 +33,15 @@
   @include justifyCenterAlignCenter;
 }
 
+@mixin justifyCenterAlignStart {
+  justify-content: center;
+  align-items: start;
+}
+
+.justifyCenterAlignStart {
+  @include justifyCenterAlignCenter;
+}
+
 @mixin justifyStartAlignCenter {
   justify-content: start;
   align-items: center;
