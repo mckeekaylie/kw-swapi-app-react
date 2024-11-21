@@ -13,7 +13,7 @@ This application contains a series of tests for both the home and detail views, 
 To run the tests:
 - run `yarn test` inside the project directory * * kw-swapi-app-react
 
-## Browser support
+## Browser support DESKTOP
 - Chrome
   verified with: _Version 131.0.6778.71 (Official Build) (x86_64)_
 - Firefox
@@ -24,4 +24,18 @@ To run the tests:
   verified with _Version 114.0.5282.185 x86_64_
 - DuckDuckGo
   verified with _Version 1.114.0 308_
+
+
+## Browser support MOBILE
+- Chrome
+  verified with: _Version 131.0.6778.39_
+- Firefox
+  verified with: _Version 132.0.2_
+- Safari
+  verified with: _iPad OS 17.6.1_
+- Opera
+  verified with _Version 85.7.4500.82229_
+- DuckDuckGo
+  verified with _Version 5.219.0_
+ 
  
