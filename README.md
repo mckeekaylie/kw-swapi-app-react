@@ -2,6 +2,9 @@
 This is a Next.js 15.0.3/React 19.0.0 single-page application that fetches planets in the Star Wars canon via [SWAPI](https://swapi.dev/).
 
 ## Getting it up and running locally
+
+IMPORTANT: you must have node.js and Git installed on your computer for the following to work:
+
 - run `git clone https://github.com/mckeekaylie/kw-swapi-app-react.git` inside the directory of choice on your desktop
 - run `yarn` inside the project directory _kw-swapi-app-react_
 - run `yarn dev` inside the project directory _kw-swapi-app-react_
