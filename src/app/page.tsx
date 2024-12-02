@@ -120,27 +120,29 @@ export default function Home() {
         >
           {/* Hero */}
           <div className={styles.homeHero}>
-            <h4 className="mb-1" style={{ color: "white", marginTop: 0 }}>
-              The Planets Of:
-            </h4>
-            <Image
-              className={styles.swLogo}
-              src="/images/star-wars-logo.svg"
-              width={500}
-              height={200}
-              alt="Star Wars logo from worldvectorlogo.com"
-              loading="lazy"
-            />
+            <h1 className="mb-1" style={{ color: "white", marginTop: 0 }}>
+              <div className="flex flexColumn justifyCenterAlignCenter">
+                The Planets Of:
+                <Image
+                  className={styles.swLogo}
+                  src="/images/star-wars-logo.svg"
+                  width={500}
+                  height={200}
+                  alt="Star Wars"
+                  loading="lazy"
+                />
+              </div>
+            </h1>
           </div>
           {/* Everything below the Hero */}
           <div className="pageContent pt-2 pb-2">
             {/* Featured Planets */}
-            <h1
+            <h2
               className="mb-1"
               style={{ color: vars.yellow, textAlign: "center" }}
             >
               Featured Planets
-            </h1>
+            </h2>
             <div className="row">
               {featured.map((planet) => (
                 <div
@@ -162,7 +164,7 @@ export default function Home() {
                           />
                         </div>
                       </div>
-                      <div className="p-1">
+                      <article className="p-1">
                         <h5 className="mb-1">{planet.name}</h5>
                         <p>
                           <span className="label">Rotation Period: </span>
@@ -180,7 +182,7 @@ export default function Home() {
                           <span className="label">Climate: </span>
                           {planet.climate}
                         </p>
-                      </div>
+                      </article>
                     </div>
                   </div>
                 </div>
@@ -188,21 +190,23 @@ export default function Home() {
             </div>
             {/* All Planets (planet search)  */}
             {/* Search input */}
-            <div className="row fw-400 mt-2">
-              <div className={styles.planetSearch}>
-                <h1 className="mb-1" style={{ color: vars.yellow }}>
-                  All Planets
-                </h1>
-                <input
-                  className={styles.searchBar}
-                  type="text"
-                  id="inputId"
-                  placeholder="Filter by planet name..."
-                  value={inputValue ?? ""}
-                  onChange={handleChange}
-                ></input>
+            <form>
+              <div className="row fw-400 mt-2">
+                <div className={styles.planetSearch}>
+                  <h2 className="mb-1" style={{ color: vars.yellow }}>
+                    All Planets
+                  </h2>
+                  <input
+                    className={styles.searchBar}
+                    type="text"
+                    id="inputId"
+                    placeholder="Filter by planet name..."
+                    value={inputValue ?? ""}
+                    onChange={handleChange}
+                  ></input>
+                </div>
               </div>
-            </div>
+            </form>
             {/* Planet Chips */}
             <div className="flexColumn justifyCenterAlignCenter">
               <div className={styles.planetChipsWrapper} key="chips">
