@@ -6,8 +6,6 @@
 .errorScreen {
   @include flex.flex;
   @include images.heroImg;
-  // image is from Freepik, premium license
-  background: url("/images/bkgd-galaxy.jpg");
   background-color: vars.$galaxy;
   height: 100vh;
 }
@@ -15,6 +13,7 @@
 /* LOADING SCREEN */
 .loadingScreen {
   @include flex.justifyStartAlignCenter;
+  position: absolute;
 }
 
 @keyframes loaderSvg-animate {

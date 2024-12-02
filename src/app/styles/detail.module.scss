@@ -15,9 +15,16 @@
   @include flex.justifyCenterAlignCenter;
   @include images.heroImg;
   // image is from alamy.com, individual license
-  background: url("/images/hyperdrive.jpeg");
+  background: url("/images/hyperdrive.webp");
   color: vars.$yellow;
   text-align: center;
+}
+
+.infoBelowPlanetName {
+  background-color: rgba(0, 2, 19, 1);
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+  margin: 0 2rem;
 }
 
 .climateTerrain {
@@ -140,11 +147,11 @@
     @include flex.flex;
     @include flex.justifyCenterAlignCenter;
 
-    h6 {
+    p {
       padding-right: 2rem;
     }
 
-    h6:nth-child(3) {
+    p:nth-child(3) {
       padding-right: 0;
     }
   }

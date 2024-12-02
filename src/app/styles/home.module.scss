@@ -8,7 +8,7 @@
   @include flex.justifyCenterAlignCenter;
   @include images.heroImg;
   // image is from Freepik, premium license
-  background: url("/images/bkgd-galaxy.jpg");
+  background: url("/images/bkgd-galaxy.webp");
 }
 
 .swLogo {
@@ -18,7 +18,7 @@
 /* FEATURED */
 .featuredPlanet {
   @include flex.flex;
-  @include flex.justifyBetweenAlignCenter;
+  @include flex.justifyBetweenAlignTop;
   border: 0.25rem solid vars.$blue;
   border-radius: 1rem;
   color: white;
@@ -42,7 +42,7 @@
   @include flex.justifyEndAlignCenter;
   @include images.heroImg;
   // image is from wallpapers.com, by usnlady205
-  background: url("/images/deathStarBattle.jpg");
+  background: url("/images/deathStarBattle.webp");
   background-position: center;
 }
 
@@ -116,5 +116,20 @@
 @media (max-width: 991.99px) {
   .searchBar {
     width: 80%;
+  }
+}
+
+@media (max-width: 575.99px) {
+  .featuredPlanet {
+    text-align: center;
+    @include flex.justifyCenterAlignCenter;
+    div:nth-child(1) {
+      @include flex.flexColumn;
+    }
+
+    img {
+      display: block;
+      margin: auto;
+    }
   }
 }

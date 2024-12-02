@@ -35,7 +35,7 @@
 
 @mixin justifyCenterAlignStart {
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .justifyCenterAlignStart {
@@ -43,12 +43,12 @@
 }
 
 @mixin justifyStartAlignCenter {
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
 }
 
 @mixin justifyEndAlignCenter {
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
 }
 
@@ -68,6 +68,15 @@
 
 .justifyBetweenAlignCenter {
   @include justifyBetweenAlignCenter;
+}
+
+@mixin justifyBetweenAlignTop {
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.justifyBetweenAlignTop {
+  @include justifyBetweenAlignTop;
 }
 
 /* GRID */

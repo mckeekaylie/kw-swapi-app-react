@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 
 // CUSTOM STYLES
 import styles from "../../styles/detail.module.scss";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function PlanetDetail() {
   const { data, error, isLoading } = GetPlanets();
@@ -54,117 +55,131 @@ export default function PlanetDetail() {
   }
 
   return (
-    <div>
-      {/* Nav */}
-      <div className={`${styles.topBar} p-1`}>
-        <Link href={`/`}>
-          <Image
-            className={styles.backArrow}
-            src="/images/icons/back-arrow.svg"
-            width={36}
-            height={36}
-            alt="Return to home"
-          />
-        </Link>
-      </div>
-      {/* Hero */}
-      <div className={styles.planetDetailCover}>
-        <div>
-          <h1 className="mb-2">{planet?.name}</h1>
-          <div className={styles.infoBelowPlanetName}>
-            <h6 data-testid="diameter">
-              Diameter: <span className="fw-400">{planet?.diameter}</span>
-            </h6>
-            <h6 data-testid="gravity">
-              Gravity: <span className="fw-400">{planet?.gravity}</span>
-            </h6>
-            <h6 data-testid="surfaceWater">
-              Surface Water:{" "}
-              <span className="fw-400">{planet?.surface_water}</span>
-            </h6>
-          </div>
-        </div>
-      </div>
-      {/* Everything below the hero */}
-      <div className="pageContent">
-        {/* Climate & Terrain */}
-        <div className="row">
-          <div className="col">
-            <div className={`${styles.climateTerrain} p-1 m-1`}>
-              <div className={styles.imgTextWrapper}>
-                <div>
+    <main style={{ backgroundColor: "#000213" }}>
+      <AnimatePresence>
+        <motion.div
+          transition={{ duration: 0.3, delay: 0.25, ease: "easeIn" }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <header>
+            <nav>
+              {/* Nav */}
+              <div className={`${styles.topBar} p-1`}>
+                <Link href={`/`}>
                   <Image
-                    className={styles.climateTerrainIcon}
-                    src="/images/icons/climate.svg"
-                    width={62}
-                    height={62}
-                    alt="Climate icon"
+                    className={styles.backArrow}
+                    src="/images/icons/back-arrow.svg"
+                    width={36}
+                    height={36}
+                    alt="Return to home"
                   />
+                </Link>
+              </div>
+            </nav>
+            {/* Hero */}
+            <div className={styles.planetDetailCover}>
+              <div>
+                <h1 className="mb-1">{planet?.name}</h1>
+                <div className={styles.infoBelowPlanetName}>
+                  <p className="bigger" data-testid="diameter">
+                    Diameter: <span className="fw-400">{planet?.diameter}</span>
+                  </p>
+                  <p className="bigger" data-testid="gravity">
+                    Gravity: <span className="fw-400">{planet?.gravity}</span>
+                  </p>
+                  <p className="bigger" data-testid="surfaceWater">
+                    Surface Water:{" "}
+                    <span className="fw-400">{planet?.surface_water}</span>
+                  </p>
                 </div>
-                <div className={styles.textWrapper}>
-                  <h6>Climate</h6>
-                  <h6 className="fw-300" data-testid="climate">
-                    {planet?.climate.split(",").map((word, index) => (
-                      <span key={index}>
-                        {word}
-                        <br />
-                      </span>
-                    ))}
-                  </h6>
+              </div>
+            </div>
+          </header>
+
+          {/* Everything below the hero */}
+          <div className="pageContent">
+            {/* Climate & Terrain */}
+            <div className="row">
+              <div className="col">
+                <div className={`${styles.climateTerrain} p-1 m-1`}>
+                  <div className={styles.imgTextWrapper}>
+                    <div>
+                      <Image
+                        className={styles.climateTerrainIcon}
+                        src="/images/icons/climate.svg"
+                        width={62}
+                        height={62}
+                        alt="Climate icon"
+                      />
+                    </div>
+                    <div className={styles.textWrapper}>
+                      <h6>Climate</h6>
+                      <h6 className="fw-300" data-testid="climate">
+                        {planet?.climate.split(",").map((word, index) => (
+                          <span key={index}>
+                            {word}
+                            <br />
+                          </span>
+                        ))}
+                      </h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col">
+                <div className={`${styles.climateTerrain} p-1 m-1`}>
+                  <div className={styles.imgTextWrapper}>
+                    <div>
+                      <Image
+                        className={styles.climateTerrainIcon}
+                        src="/images/icons/terrain.svg"
+                        width={62}
+                        height={62}
+                        alt="Terrain icon"
+                      />
+                    </div>
+                    <div className={styles.textWrapper}>
+                      <h6>Terrain</h6>
+                      <h6 className="fw-300" data-testid="terrain">
+                        {planet?.terrain.split(",").map((word, index) => (
+                          <span key={index}>
+                            {word}
+                            <br />
+                          </span>
+                        ))}
+                      </h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="spacer"></div>
+            {/* Orbital Period & Rotation Period */}
+            <div className="row">
+              <div className="col">
+                <div className={styles.orbitalWrapper}>
+                  <h4 className="p-2" data-testid="orbital">
+                    Orbital Period: {planet?.orbital_period}
+                  </h4>
+                  <div className={styles.outerOrbit}>
+                    <div className={styles.orbitCircle}></div>
+                  </div>
+                </div>
+              </div>
+              <div className="col">
+                <div className={styles.orbitalWrapper}>
+                  <h4 className="p-2" data-testid="rotation">
+                    Rotation Period: {planet?.rotation_period}
+                  </h4>
+                  <div className={styles.sphere}></div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="col">
-            <div className={`${styles.climateTerrain} p-1 m-1`}>
-              <div className={styles.imgTextWrapper}>
-                <div>
-                  <Image
-                    className={styles.climateTerrainIcon}
-                    src="/images/icons/terrain.svg"
-                    width={62}
-                    height={62}
-                    alt="Terrain icon"
-                  />
-                </div>
-                <div className={styles.textWrapper}>
-                  <h6>Terrain</h6>
-                  <h6 className="fw-300" data-testid="terrain">
-                    {planet?.terrain.split(",").map((word, index) => (
-                      <span key={index}>
-                        {word}
-                        <br />
-                      </span>
-                    ))}
-                  </h6>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="spacer"></div>
-        {/* Orbital Period & Rotation Period */}
-        <div className="row">
-          <div className="col">
-            <div className={styles.orbitalWrapper}>
-              <h4 className="p-2" data-testid="orbital">
-                Orbital Period: {planet?.orbital_period}
-              </h4>
-              <div className={styles.outerOrbit}>
-                <div className={styles.orbitCircle}></div>
-              </div>
-            </div>
-          </div>
-          <div className="col">
-            <div className={styles.orbitalWrapper}>
-              <h4 className="p-2" data-testid="rotation">
-                Rotation Period: {planet?.rotation_period}
-              </h4>
-              <div className={styles.sphere}></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+        </motion.div>
+      </AnimatePresence>
+    </main>
   );
 }
