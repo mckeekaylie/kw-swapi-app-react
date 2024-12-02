@@ -17,7 +17,6 @@ export default function LoadingScreen() {
         alt="Star Wars Naboo Ship icon by Icons8"
         width={120}
         height={120}
-        priority
       />
     </div>
   );
