@@ -40,5 +40,15 @@ To run the tests:
   verified with _Version 85.7.4500.82229_
 - DuckDuckGo
   verified with _Version 5.219.0_
- 
+
+ ## Image Attributions
+ - Star Wars Naboo Ship icon: [Icons8](https://icons8.com/icon/A5m8pfz5UiSL/star-wars-naboo-ship)
+ - Galaxy background (loading screen and home page) [Freepik](https://www.freepik.com), Premium License
+ - Star Wars logo: [World Vector Logo](https://www.worldvectorlogo.com)
+ - Featured planet images: [wookieepedia](https://starwars.fandom.com/wiki/Main_Page)
+ - ALL other icons [Flaticon](https://www.flaticon.com), Premium License
+ - All Planets background: [Wallpapers.com](https://www.wallpapers.com), by usnlady205
+ - Planet Detail background: [Alamy](https://www.alamy.com/-image225450593.html?imageid=E0C7DB78-CA50-4F41-B197-84D31686AA9C&p=334254&pn=1&searchId=bc6333f92afba1856d7971e9d824c4dc&searchtype=0), Individual License
+
+
  
