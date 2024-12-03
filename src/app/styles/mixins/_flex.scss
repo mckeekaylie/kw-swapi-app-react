@@ -11,10 +11,6 @@
   flex-wrap: wrap;
 }
 
-.flexWrap {
-  @include flexWrap;
-}
-
 @mixin flexColumn {
   display: flex;
   flex-direction: column;
@@ -38,10 +34,6 @@
   align-items: flex-start;
 }
 
-.justifyCenterAlignStart {
-  @include justifyCenterAlignCenter;
-}
-
 @mixin justifyStartAlignCenter {
   justify-content: flex-start;
   align-items: center;
@@ -57,26 +49,14 @@
   align-items: center;
 }
 
-.justifyEvenlyAlignCenter {
-  @include justifyEvenlyAlignCenter;
-}
-
 @mixin justifyBetweenAlignCenter {
   justify-content: space-between;
   align-items: center;
 }
 
-.justifyBetweenAlignCenter {
-  @include justifyBetweenAlignCenter;
-}
-
 @mixin justifyBetweenAlignTop {
   justify-content: space-between;
   align-items: flex-start;
-}
-
-.justifyBetweenAlignTop {
-  @include justifyBetweenAlignTop;
 }
 
 /* GRID */

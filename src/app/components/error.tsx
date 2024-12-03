@@ -11,7 +11,7 @@ export default function ErrorScreen() {
           src="/images/icons/grievous.svg"
           width={180}
           height={180}
-          alt="General Grievous icon by Flaticon, premium license"
+          alt="General Grievous"
         />
         <h5>Please try again later.</h5>
       </div>

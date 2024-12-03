@@ -14,6 +14,7 @@ function fetcher(url): Promise<PlanetRes[]> {
   });
 }
 
+// execute a request for each page, wait for all requests to complete
 function multiFetcher(urls): Promise<PlanetRes[]> {
   return Promise.all(urls.map((url) => fetcher(url)));
 }
@@ -21,6 +22,7 @@ function multiFetcher(urls): Promise<PlanetRes[]> {
 export function GetPlanets() {
   const urls: string[] = [];
 
+  // Gather each url needed to request ALL planets from SWAPI since the response data is paginated
   for (let i = 1; i <= 6; i++) {
     urls.push(`${url}?page=${i}`);
   }

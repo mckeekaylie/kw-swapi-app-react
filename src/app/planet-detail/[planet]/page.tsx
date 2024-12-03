@@ -3,6 +3,7 @@
 // COMPONENTS
 import ErrorScreen from "../../components/error";
 import LoadingScreen from "../../components/loading";
+import OrbitRotate from "../../components/orbitRotate";
 
 // INTERFACES
 import { Planets } from "../../interfaces/planets";
@@ -20,12 +21,15 @@ import { useEffect, useState } from "react";
 
 // CUSTOM STYLES
 import styles from "../../styles/detail.module.scss";
+
+// FRAMER MOTION
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function PlanetDetail() {
   const { data, error, isLoading } = GetPlanets();
 
   const [planet, setPlanet] = useState<Planets>();
+
   const planetParam = useParams<{ planet: string }>();
 
   useEffect(() => {
@@ -42,6 +46,7 @@ export default function PlanetDetail() {
       const activePlanet = planetsContainer.find(
         (x) => x.name === decodeURIComponent(planetParam.planet)
       );
+
       setPlanet(activePlanet);
     }
   }, [data, planetParam.planet]);
@@ -63,40 +68,40 @@ export default function PlanetDetail() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <header>
-            <nav>
-              {/* Nav */}
-              <div className={`${styles.topBar} p-1`}>
-                <Link href={`/`}>
-                  <Image
-                    className={styles.backArrow}
-                    src="/images/icons/back-arrow.svg"
-                    width={36}
-                    height={36}
-                    alt="Return to home"
-                  />
-                </Link>
-              </div>
-            </nav>
-            {/* Hero */}
-            <div className={styles.planetDetailCover}>
-              <div>
-                <h1 className="mb-1">{planet?.name}</h1>
-                <div className={styles.infoBelowPlanetName}>
-                  <p className="bigger" data-testid="diameter">
-                    Diameter: <span className="fw-400">{planet?.diameter}</span>
-                  </p>
-                  <p className="bigger" data-testid="gravity">
-                    Gravity: <span className="fw-400">{planet?.gravity}</span>
-                  </p>
-                  <p className="bigger" data-testid="surfaceWater">
-                    Surface Water:{" "}
-                    <span className="fw-400">{planet?.surface_water}</span>
-                  </p>
-                </div>
+          {/* Nav */}
+          <nav>
+            {/* Nav */}
+            <div className={`${styles.topBar} p-1`}>
+              <Link href={`/`}>
+                <Image
+                  className={styles.backArrow}
+                  src="/images/icons/back-arrow.svg"
+                  width={36}
+                  height={36}
+                  alt="Return to home"
+                />
+              </Link>
+            </div>
+          </nav>
+
+          {/* Hero */}
+          <div className={styles.planetDetailCover}>
+            <div>
+              <h1 className="mb-1">{planet?.name}</h1>
+              <div className={styles.infoBelowPlanetName}>
+                <p className="bigger" data-testid="diameter">
+                  Diameter: <span className="fw-400">{planet?.diameter}</span>
+                </p>
+                <p className="bigger" data-testid="gravity">
+                  Gravity: <span className="fw-400">{planet?.gravity}</span>
+                </p>
+                <p className="bigger" data-testid="surfaceWater">
+                  Surface Water:{" "}
+                  <span className="fw-400">{planet?.surface_water}</span>
+                </p>
               </div>
             </div>
-          </header>
+          </div>
 
           {/* Everything below the hero */}
           <div className="pageContent">
@@ -157,27 +162,7 @@ export default function PlanetDetail() {
                 </div>
               </div>
               <div className="spacer"></div>
-              {/* Orbital Period & Rotation Period */}
-              <div className="row">
-                <div className="col">
-                  <div className={styles.orbitalWrapper}>
-                    <h4 className="p-2" data-testid="orbital">
-                      Orbital Period: {planet?.orbital_period}
-                    </h4>
-                    <div className={styles.outerOrbit}>
-                      <div className={styles.orbitCircle}></div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col">
-                  <div className={styles.orbitalWrapper}>
-                    <h4 className="p-2" data-testid="rotation">
-                      Rotation Period: {planet?.rotation_period}
-                    </h4>
-                    <div className={styles.sphere}></div>
-                  </div>
-                </div>
-              </div>
+              <OrbitRotate planet={planet}></OrbitRotate>
             </section>
           </div>
         </motion.div>

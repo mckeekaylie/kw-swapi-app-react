@@ -1,3 +1,4 @@
+// the planets displayed under Featured
 export enum Featured {
   Feature1 = "Tatooine",
   Feature2 = "Endor",
@@ -7,6 +8,7 @@ export enum Featured {
   Feature6 = "Hoth",
 }
 
+// the icons displayed in the planet chips under All Planets
 export enum Icons {
   AtAtWalker = "at-at-walker.svg",
   MillenniumFalcon = "millennium-falcon.svg",

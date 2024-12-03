@@ -50,20 +50,19 @@
   }
 }
 
-// ORBIT ANIMATION
+// WRAPS ORBITAL AND ROTATION PERIOD ANIMATIONS
 .orbitalWrapper {
   @include flex.flexColumn;
   @include flex.justifyCenterAlignCenter;
   padding: 1rem;
 }
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+// ORBITAL PERIOD
+.outerOrbit {
+  width: 20rem;
+  height: 20rem;
+  border: 0.12rem dotted vars.$orange;
+  border-radius: 100%;
 }
 
 .orbitCircle {
@@ -75,26 +74,7 @@
   border-radius: 100%;
 }
 
-.outerOrbit {
-  width: 20rem;
-  height: 20rem;
-  border: 0.12rem dotted vars.$orange;
-  border-radius: 100%;
-  -webkit-animation: spin-right 20s linear infinite;
-  animation: spin-right 20s linear infinite;
-}
-
-@keyframes spin-right {
-  100% {
-    -webkit-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-
-// ROTATION ANIMATION
+// ROTATION PERIOD
 .sphere {
   animation: spin 8s linear infinite;
   border: 0.12rem dotted vars.$orange;
