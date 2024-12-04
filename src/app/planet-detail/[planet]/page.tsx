@@ -24,6 +24,7 @@ import styles from "../../styles/detail.module.scss";
 
 // FRAMER MOTION
 import { AnimatePresence, motion } from "framer-motion";
+import ClimateTerrain from "@/app/components/climateTerrain";
 
 export default function PlanetDetail() {
   const { data, error, isLoading } = GetPlanets();
@@ -70,7 +71,6 @@ export default function PlanetDetail() {
         >
           {/* Nav */}
           <nav>
-            {/* Nav */}
             <div className={`${styles.topBar} p-1`}>
               <Link href={`/`}>
                 <Image
@@ -86,17 +86,28 @@ export default function PlanetDetail() {
 
           {/* Hero */}
           <div className={styles.planetDetailCover}>
-            <div>
-              <h1 className="mb-1">{planet?.name}</h1>
+            <Image
+              className={styles.bkgdImg}
+              src="/images/hyperdrive.webp"
+              alt="hyperdrive"
+              objectFit="cover"
+              width={1280}
+              height={720}
+              objectPosition="center"
+            />
+            <div style={{ position: "absolute" }}>
+              <h1 className="mb-1 fw-700">{planet?.name}</h1>
               <div className={styles.infoBelowPlanetName}>
                 <p className="bigger" data-testid="diameter">
-                  Diameter: <span className="fw-400">{planet?.diameter}</span>
+                  <span className="fw-500">Diameter: </span>
+                  <span className="fw-400">{planet?.diameter}</span>
                 </p>
                 <p className="bigger" data-testid="gravity">
-                  Gravity: <span className="fw-400">{planet?.gravity}</span>
+                  <span className="fw-500">Gravity: </span>
+                  <span className="fw-400">{planet?.gravity}</span>
                 </p>
                 <p className="bigger" data-testid="surfaceWater">
-                  Surface Water:{" "}
+                  <span className="fw-500">Surface Water: </span>
                   <span className="fw-400">{planet?.surface_water}</span>
                 </p>
               </div>
@@ -107,61 +118,10 @@ export default function PlanetDetail() {
           <div className="pageContent">
             {/* Climate & Terrain */}
             <section>
-              <div className="row">
-                <div className="col">
-                  <div className={`${styles.climateTerrain} p-1 m-1`}>
-                    <div className={styles.imgTextWrapper}>
-                      <div>
-                        <Image
-                          className={styles.climateTerrainIcon}
-                          src="/images/icons/climate.svg"
-                          width={62}
-                          height={62}
-                          alt="Climate icon"
-                        />
-                      </div>
-                      <div className={styles.textWrapper}>
-                        <h6>Climate</h6>
-                        <h6 className="fw-300" data-testid="climate">
-                          {planet?.climate.split(",").map((word, index) => (
-                            <span key={index}>
-                              {word}
-                              <br />
-                            </span>
-                          ))}
-                        </h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col">
-                  <div className={`${styles.climateTerrain} p-1 m-1`}>
-                    <div className={styles.imgTextWrapper}>
-                      <div>
-                        <Image
-                          className={styles.climateTerrainIcon}
-                          src="/images/icons/terrain.svg"
-                          width={62}
-                          height={62}
-                          alt="Terrain icon"
-                        />
-                      </div>
-                      <div className={styles.textWrapper}>
-                        <h6>Terrain</h6>
-                        <h6 className="fw-300" data-testid="terrain">
-                          {planet?.terrain.split(",").map((word, index) => (
-                            <span key={index}>
-                              {word}
-                              <br />
-                            </span>
-                          ))}
-                        </h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <ClimateTerrain planet={planet}></ClimateTerrain>
               <div className="spacer"></div>
+            </section>
+            <section>
               <OrbitRotate planet={planet}></OrbitRotate>
             </section>
           </div>

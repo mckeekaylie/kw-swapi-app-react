@@ -8,13 +8,21 @@ import { motion } from "framer-motion";
 import styles from "../styles/detail.module.scss";
 
 const OrbitRotate = (props) => {
-  const [duration, setDuration] = useState<number>();
+  const [orbitalDuration, setOrbitalDuration] = useState<number>();
+  const [rotationDuration, setRotationDuration] = useState<number>();
 
   useEffect(() => {
     if (props.planet?.orbital_period !== undefined) {
-      const newDuration =
-        Math.round(Number(props.planet.orbital_period) / 365) * 2;
-      setDuration(newDuration);
+      const orbitalDuration =
+        Math.round(Number(props.planet.orbital_period) / 365) * 4;
+      setOrbitalDuration(orbitalDuration);
+    }
+
+    if (props.planet?.rotation_period !== undefined) {
+      const rotationDuration = Math.round(
+        Number(props.planet.rotation_period) / 2
+      );
+      setRotationDuration(rotationDuration);
     }
   }, [props]);
 
@@ -28,13 +36,14 @@ const OrbitRotate = (props) => {
               Orbital Period: {props.planet?.orbital_period}
             </figcaption>
             <motion.div
-              key={duration}
+              key={orbitalDuration}
               animate={{ rotate: 360 }}
               className={styles.outerOrbit}
               transition={{
-                duration: duration,
+                duration: orbitalDuration,
                 delay: 0,
                 repeat: Infinity,
+                repeatDelay: 0,
               }}
             >
               <div className={styles.orbitCircle}></div>
@@ -42,6 +51,7 @@ const OrbitRotate = (props) => {
           </div>
         </figure>
       </div>
+
       {/* Rotation Period */}
       <div className="col">
         <figure>
@@ -49,7 +59,23 @@ const OrbitRotate = (props) => {
             <figcaption className="p-2" data-testid="rotation">
               Rotation Period: {props.planet?.rotation_period}
             </figcaption>
-            <div className={styles.sphere}></div>
+            {rotationDuration ? (
+              <motion.div
+                className={styles.sphere}
+                initial={{ rotateY: 0 }}
+                animate={{ rotateY: 360 }}
+                transition={{
+                  duration: rotationDuration,
+                  delay: 0,
+                  repeat: Infinity,
+                  repeatDelay: 0,
+                  ease: "linear",
+                }}
+              >
+                <motion.div className={styles.innerSphere}></motion.div>
+                <motion.div className={styles.innerSphere}></motion.div>
+              </motion.div>
+            ) : null}
           </div>
         </figure>
       </div>

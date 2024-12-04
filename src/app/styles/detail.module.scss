@@ -1,7 +1,7 @@
 @use "mixins/_flex.scss" as flex;
-@use "mixins/images" as images;
 @use "variables.module.scss" as vars;
 
+/* NAV */
 .topBar {
   background-color: black;
 
@@ -10,32 +10,51 @@
   }
 }
 
+/* HERO */
 .planetDetailCover {
   @include flex.flexColumn;
   @include flex.justifyCenterAlignCenter;
-  @include images.heroImg;
-  // image is from alamy.com, individual license
-  background: url("/images/hyperdrive.webp");
+  background-color: black;
   color: vars.$yellow;
   text-align: center;
+
+  .bkgdImg {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    opacity: 0.3;
+  }
 }
 
 .infoBelowPlanetName {
-  background-color: rgba(0, 2, 19, 1);
+  background-color: vars.$orange;
+  color: vars.$galaxy;
   border-radius: 1rem;
-  padding: 1rem 2rem;
   margin: 0 2rem;
+
+  p {
+    padding: 1rem 2rem;
+    height: 100%;
+  }
 }
 
+/* CLIMATE TERRAIN */
 .climateTerrain {
   @include flex.flexWrap;
   border: 0.12rem solid vars.$blue;
   border-radius: 1rem;
   color: white;
+  height: 100%;
 
-  h2 {
-    color: vars.$blue;
-    margin: auto 0.75rem auto auto;
+  dl {
+    dt {
+      font-size: clamp(1.75rem, 4vw + 1rem, 2rem);
+      font-weight: 500;
+    }
+    dd {
+      font-size: clamp(1.5rem, 4vw + 1rem, 1.75rem);
+      font-weight: 400;
+    }
   }
 
   .imgTextWrapper {
@@ -43,12 +62,10 @@
     align-items: center;
     width: 100%;
     padding: 0 1rem;
-
-    .textWrapper {
-      width: 100%;
-    }
   }
 }
+
+/* ORBITAL PERIOD AND ROTATION PERIOD */
 
 // WRAPS ORBITAL AND ROTATION PERIOD ANIMATIONS
 .orbitalWrapper {
@@ -75,8 +92,8 @@
 }
 
 // ROTATION PERIOD
-.sphere {
-  animation: spin 8s linear infinite;
+.sphere,
+.innerSphere {
   border: 0.12rem dotted vars.$orange;
   border-radius: 50%;
   height: 20rem;
@@ -84,80 +101,73 @@
   transform-style: preserve-3d;
 }
 
-.sphere::before,
-.sphere::after {
-  border: 0.12rem dashed vars.$orange;
-  border-radius: 50%;
-  content: "";
-  height: 20rem;
-  width: 20rem;
-  left: 0;
-  top: 0;
+.innerSphere {
   position: absolute;
 }
 
-.sphere::before {
+.innerSphere:nth-child(1) {
   transform: rotateY(-60deg);
 }
 
-.sphere::after {
+.innerSphere:nth-child(2) {
   transform: rotateY(60deg);
 }
 
-@keyframes spin {
-  0% {
-    -webkit-transform: rotateY(0deg);
-    -moz-transform: rotateY(0deg);
-    -ms-transform: rotateY(0deg);
-    -o-transform: rotateY(0deg);
-    transform: rotateY(0deg);
-  }
-  100% {
-    -webkit-transform: rotateY(360deg);
-    -moz-transform: rotateY(360deg);
-    -ms-transform: rotateY(360deg);
-    -o-transform: rotateY(360deg);
-    transform: rotateY(360deg);
-  }
-}
-
 /* MEDIA QUERIES */
-@media (min-width: 568px) {
+@media (min-width: 768px) {
   .infoBelowPlanetName {
     @include flex.flex;
     @include flex.justifyCenterAlignCenter;
 
     p {
-      padding-right: 2rem;
-    }
-
-    p:nth-child(3) {
-      padding-right: 0;
+      border-right: 1px solid black;
     }
   }
+}
 
+@media (min-width: 568px) {
   .climateTerrain {
-    .textWrapper {
-      @include flex.flex;
-      @include flex.justifyBetweenAlignCenter;
-
-      h6:nth-child(1) {
-        margin-left: 1rem;
-      }
-
-      h6:nth-child(2) {
-        text-align: right;
+    .imgTextWrapper {
+      img {
+        margin-right: 1rem;
       }
     }
-    height: 100%;
+    dl {
+      @include flex.flex;
+      @include flex.justifyBetweenAlignCenter;
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 767.99px) {
+  .infoBelowPlanetName {
+    margin: 2rem 2rem 0rem 2rem;
+    width: 54vw;
+
+    p {
+      border-bottom: 1px solid black;
+    }
   }
 }
 
 @media (max-width: 567.99px) {
   .climateTerrain {
-    .textWrapper {
+    .imgTextWrapper {
       @include flex.flexColumn;
+
+      img {
+        margin-right: 0;
+      }
+    }
+    dl {
+      text-align: center;
+      margin: 0;
       padding: 1rem;
+
+      dd {
+        margin: 0;
+      }
     }
   }
 }
