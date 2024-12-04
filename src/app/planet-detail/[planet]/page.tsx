@@ -94,6 +94,7 @@ export default function PlanetDetail() {
               width={1280}
               height={720}
               objectPosition="center"
+              priority
             />
             <div style={{ position: "absolute" }}>
               <h1 className="mb-1 fw-700">{planet?.name}</h1>
