@@ -14,7 +14,7 @@ import { GetPlanets } from "../../hooks/getPlanets";
 // NEXT
 import Image from "next/image";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { notFound, useParams } from "next/navigation";
 
 // REACT
 import { useEffect, useState } from "react";
@@ -47,6 +47,10 @@ export default function PlanetDetail() {
       const activePlanet = planetsContainer.find(
         (x) => x.name === decodeURIComponent(planetParam.planet)
       );
+
+      if (activePlanet === undefined) {
+        notFound();
+      }
 
       setPlanet(activePlanet);
     }
@@ -118,11 +122,11 @@ export default function PlanetDetail() {
           {/* Everything below the hero */}
           <div className="pageContent">
             {/* Climate & Terrain */}
-            <section>
+            <section id="climateTerrain">
               <ClimateTerrain planet={planet}></ClimateTerrain>
               <div className="spacer"></div>
             </section>
-            <section>
+            <section id="orbitalRotationalPeriod">
               <OrbitRotate planet={planet}></OrbitRotate>
             </section>
           </div>

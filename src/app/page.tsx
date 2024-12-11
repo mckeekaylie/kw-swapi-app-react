@@ -165,7 +165,11 @@ export default function Home() {
                         </div>
                       </div>
                       <article className="p-1">
-                        <h5 className="mb-1">{planet.name}</h5>
+                        <Link href={`/planet-detail/${planet.name}`} className="styles.featuredPlanetNameLink">
+                          <p className={styles.featuredPlanetName}>
+                            {planet.name}
+                          </p>
+                        </Link>
                         <p>
                           <span className="label">Rotation Period: </span>
                           {planet.rotation_period}
@@ -193,10 +197,15 @@ export default function Home() {
             <form>
               <div className="row fw-400 mt-2">
                 <div className={styles.planetSearch}>
-                  <h2 className="mb-1" style={{ color: vars.yellow }}>
+                  <h2
+                    className="mb-1"
+                    style={{ color: vars.yellow }}
+                    id="allPlanets"
+                  >
                     All Planets
                   </h2>
                   <input
+                    aria-labelledby="allPlanets"
                     className={styles.searchBar}
                     type="text"
                     id="inputId"

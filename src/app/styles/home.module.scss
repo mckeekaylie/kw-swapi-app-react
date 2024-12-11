@@ -23,8 +23,24 @@
   border-radius: 1rem;
   color: white;
 
-  h5 {
+  a {
+    text-decoration: none !important;
+  }
+
+  .featuredPlanetName {
     color: vars.$blue;
+    font-size: clamp(2rem, 4vw + 0.5rem, 2.25rem);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .featuredPlanetName:hover {
+    color: vars.$yellow;
+    text-decoration: underline;
+  }
+
+  article p {
+    margin-bottom: 0.5rem;
   }
 }
 
@@ -103,7 +119,7 @@
 /* MEDIA QUERIES */
 @media (min-width: 992px) {
   .featuredPlanet {
-    height: 12rem;
+    height: 13.5rem;
   }
 
   .searchBar {
@@ -116,6 +132,13 @@
 @media (max-width: 991.99px) {
   .searchBar {
     width: 80%;
+  }
+}
+
+@media (min-width: 682px) and (max-width: 991.99px) {
+  .featuredPlanet {
+    margin-left: 6rem !important;
+    margin-right: 6rem !important;
   }
 }
 
