@@ -7,7 +7,7 @@ import FeaturedPlanets from "./components/featuredPlanets";
 import AllPlanets from "./components/allPlanets";
 
 // ENUMS & INTERFACES
-import { Featured, Icons } from "./enums/enum";
+import { Featured } from "./enums/enum";
 import { Planets } from "./interfaces/planets";
 
 // HOOKS
