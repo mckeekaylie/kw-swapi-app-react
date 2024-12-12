@@ -13,6 +13,8 @@
 
 .swLogo {
   max-width: 80%;
+  height: auto;
+  margin-top: 1rem;
 }
 
 /* FEATURED */
@@ -39,7 +41,7 @@
     text-decoration: underline;
   }
 
-  article p {
+  .featuredPlanetRightSide p {
     margin-bottom: 0.5rem;
   }
 }
@@ -103,7 +105,7 @@
 }
 
 .moreLessBtn {
-  background-color: vars.$blue;
+  background-color: vars.$red;
   color: white;
   margin-top: 2rem;
   padding: 1rem;
@@ -113,7 +115,7 @@
 }
 
 .moreLessBtn:hover {
-  background-color: vars.$yellow;
+  background-color: vars.$orange;
 }
 
 /* MEDIA QUERIES */

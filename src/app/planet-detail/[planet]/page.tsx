@@ -1,6 +1,7 @@
 "use client";
 
 // COMPONENTS
+import ClimateTerrain from "@/app/components/climateTerrain";
 import ErrorScreen from "../../components/error";
 import LoadingScreen from "../../components/loading";
 import OrbitRotate from "../../components/orbitRotate";
@@ -11,6 +12,9 @@ import { Planets } from "../../interfaces/planets";
 // HOOKS
 import { GetPlanets } from "../../hooks/getPlanets";
 
+// MOTION
+import { AnimatePresence, motion } from "framer-motion";
+
 // NEXT
 import Image from "next/image";
 import Link from "next/link";
@@ -19,12 +23,8 @@ import { notFound, useParams } from "next/navigation";
 // REACT
 import { useEffect, useState } from "react";
 
-// CUSTOM STYLES
+// STYLES
 import styles from "../../styles/detail.module.scss";
-
-// FRAMER MOTION
-import { AnimatePresence, motion } from "framer-motion";
-import ClimateTerrain from "@/app/components/climateTerrain";
 
 export default function PlanetDetail() {
   const { data, error, isLoading } = GetPlanets();
@@ -36,6 +36,7 @@ export default function PlanetDetail() {
   useEffect(() => {
     const planetsContainer: Planets[] = [];
 
+    // deep clone the results array inside the response object by pushing each result to planetsContainer
     if (data && data.length !== undefined) {
       for (let i = 0; i <= data.length; i++) {
         data[i]?.results.map((x) => {
@@ -48,6 +49,7 @@ export default function PlanetDetail() {
         (x) => x.name === decodeURIComponent(planetParam.planet)
       );
 
+      // if the planetParam passed does not match a planet inside planetsContainer, render 404 page
       if (activePlanet === undefined) {
         notFound();
       }
@@ -56,10 +58,12 @@ export default function PlanetDetail() {
     }
   }, [data, planetParam.planet]);
 
+  // render loading screen if getPlanets returns isLoading = true
   if (isLoading) {
     return <LoadingScreen />;
   }
 
+  // render error screen if getPlanets returns error
   if (error) {
     return <ErrorScreen />;
   }
