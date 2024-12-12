@@ -120,9 +120,9 @@ describe("planet-detail/endor", () => {
     const gravity = screen.getByTestId("gravity").textContent;
     const surfaceWater = screen.getByTestId("surfaceWater").textContent;
 
-    expect(diameter).toBe("Diameter: 4900");
-    expect(gravity).toBe("Gravity: 0.85 standard");
-    expect(surfaceWater).toBe("Surface Water: 8");
+    expect(diameter).toEqual("Diameter: 4900");
+    expect(gravity).toEqual("Gravity: 0.85 standard");
+    expect(surfaceWater).toEqual("Surface Water: 8");
   });
 
   it("renders the planet's climate and terrain", async () => {
@@ -131,8 +131,8 @@ describe("planet-detail/endor", () => {
     const climate = screen.getByTestId("climate").textContent;
     const terrain = screen.getByTestId("terrain").textContent;
 
-    expect(climate).toBe("temperate");
-    expect(terrain).toBe("forests mountains lakes");
+    expect(climate).toEqual("Climatetemperate");
+    expect(terrain).toEqual("Terrainforests mountains lakes");
   });
 
   it("renders the planet's orbital and rotation periods", async () => {
@@ -141,8 +141,8 @@ describe("planet-detail/endor", () => {
     const orbital = screen.getByTestId("orbital").textContent;
     const rotation = screen.getByTestId("rotation").textContent;
 
-    expect(orbital).toBe("Orbital Period: 402");
-    expect(rotation).toBe("Rotation Period: 18");
+    expect(orbital).toEqual("Orbital Period: 402");
+    expect(rotation).toEqual("Rotation Period: 18");
   });
 });
 

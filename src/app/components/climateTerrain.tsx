@@ -9,7 +9,10 @@ const ClimateTerrain = (props) => {
     <div className="row">
       {/* CLIMATE */}
       <div className="col">
-        <div className={`${styles.climateTerrain} p-1 m-1`}>
+        <div
+          className={`${styles.climateTerrain} p-1 m-1`}
+          data-testid="climate"
+        >
           <div className={styles.imgTextWrapper}>
             <div>
               <Image
@@ -36,7 +39,10 @@ const ClimateTerrain = (props) => {
 
       {/* TERRAIN */}
       <div className="col">
-        <div className={`${styles.climateTerrain} p-1 m-1`}>
+        <div
+          className={`${styles.climateTerrain} p-1 m-1`}
+          data-testid="terrain"
+        >
           <div className={styles.imgTextWrapper}>
             <div>
               <Image

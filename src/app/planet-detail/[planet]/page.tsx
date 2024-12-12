@@ -98,10 +98,8 @@ export default function PlanetDetail() {
               className={styles.bkgdImg}
               src="/images/hyperdrive.webp"
               alt="hyperdrive"
-              objectFit="cover"
               width={1280}
               height={720}
-              objectPosition="center"
               priority
             />
             <div style={{ position: "absolute" }}>

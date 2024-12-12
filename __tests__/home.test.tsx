@@ -101,7 +101,7 @@ describe("Home populates planet data", () => {
 
     const chips = screen.getAllByTestId("planetChip");
 
-    expect(chips.length).toBe(3);
+    expect(chips.length).toEqual(3);
   });
 
   it("populates featured cards", async () => {
@@ -127,7 +127,7 @@ describe("Home applies designated logic when inputs change", () => {
     const alderaan = screen.getByText("Alderaan");
 
     expect(alderaan).toBeTruthy;
-    expect(planetChips.length).toBe(1);
+    expect(planetChips.length).toEqual(1);
   });
 });
 
