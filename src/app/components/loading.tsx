@@ -11,6 +11,7 @@ export default function LoadingScreen() {
         alt="Galaxy background by Freepik"
         fill
         priority
+        quality={75}
       />
       <Image
         className={styles.loaderSvg}
