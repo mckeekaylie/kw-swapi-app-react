@@ -7,10 +7,10 @@ export default function LoadingScreen() {
     <div className={styles.loadingScreen} data-testid="loadingScreen">
       <Image
         src="/images/bkgd-galaxy.webp"
+        overrideSrc="/images/bkgd-galaxy.webp"
         alt="Galaxy background by Freepik"
         fill
-        placeholder="blur"
-        blurDataURL={"/images/bkgd-galaxy.webp"}
+        priority
       />
       <Image
         className={styles.loaderSvg}

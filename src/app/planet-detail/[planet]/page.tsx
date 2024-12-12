@@ -97,6 +97,7 @@ export default function PlanetDetail() {
             <Image
               className={styles.bkgdImg}
               src="/images/hyperdrive.webp"
+              overrideSrc="/images/hyperdrive.webp"
               alt="hyperdrive"
               width={1280}
               height={720}
