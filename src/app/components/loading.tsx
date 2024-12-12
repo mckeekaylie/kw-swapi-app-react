@@ -10,8 +10,6 @@ export default function LoadingScreen() {
         overrideSrc="/images/bkgd-galaxy.webp"
         alt="Galaxy background by Freepik"
         fill
-        priority
-        quality={75}
       />
       <Image
         className={styles.loaderSvg}
@@ -19,7 +17,6 @@ export default function LoadingScreen() {
         alt="Star Wars Naboo Ship icon by Icons8"
         width={120}
         height={120}
-        priority
       />
     </div>
   );
