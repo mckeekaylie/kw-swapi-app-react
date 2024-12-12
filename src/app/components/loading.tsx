@@ -9,8 +9,7 @@ export default function LoadingScreen() {
         src="/images/bkgd-galaxy.webp"
         alt="Galaxy background by Freepik"
         fill
-        placeholder="blur"
-        blurDataURL={"/images/bkgd-galaxy.webp"}
+        priority
       />
       <Image
         className={styles.loaderSvg}
@@ -18,6 +17,7 @@ export default function LoadingScreen() {
         alt="Star Wars Naboo Ship icon by Icons8"
         width={120}
         height={120}
+        priority
       />
     </div>
   );
