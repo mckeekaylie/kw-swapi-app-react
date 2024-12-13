@@ -26,6 +26,8 @@ import { useEffect, useState } from "react";
 // STYLES
 import styles from "../../styles/detail.module.scss";
 
+import hyperdrive from "../../../../public/images/hyperdrive.webp";
+
 export default function PlanetDetail() {
   const { data, error, isLoading } = GetPlanets();
 
@@ -96,7 +98,7 @@ export default function PlanetDetail() {
           <div className={styles.planetDetailCover}>
             <Image
               className={styles.bkgdImg}
-              src="/images/hyperdrive.webp"
+              src={hyperdrive}
               alt="hyperdrive"
               width={1280}
               height={720}
