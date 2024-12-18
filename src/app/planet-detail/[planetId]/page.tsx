@@ -23,22 +23,24 @@ import { useEffect, useState } from "react";
 
 // STYLES
 import styles from "../../styles/detail.module.scss";
+import ErrorScreen from "@/app/components/error";
 
 export default function PlanetDetail() {
   const [planet, setPlanet] = useState<Planets>();
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>();
 
   const planetParam = useParams<{ planetId: string }>();
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log(planetParam.planetId);
       const res = await fetch(
         `https://www.swapi.tech/api/planets/${planetParam.planetId}`
       );
 
       if (!res.ok) {
         setLoading(false);
+        setError(true);
         const error = new Error("An error occurred while fetching the data.");
         throw error;
       }
@@ -56,6 +58,11 @@ export default function PlanetDetail() {
   // if the fetchData logic is complete and the planet is still undefined, render 404 page
   if (!loading && planet === undefined) {
     notFound();
+  }
+
+  // render error screen if the request failed
+  if (error) {
+    <ErrorScreen />;
   }
 
   return (
@@ -93,6 +100,7 @@ export default function PlanetDetail() {
               priority
             />
 
+            {/* If planet data request is loading, display C-3PO loading animation */}
             {loading && (
               <div style={{ position: "absolute" }}>
                 <motion.div
@@ -114,6 +122,7 @@ export default function PlanetDetail() {
               </div>
             )}
 
+            {/* Display planet name and info in hero once the planet data request is complete */}
             {!loading && (
               <div style={{ position: "absolute" }}>
                 <h1 className="mb-1 fw-700">{planet?.name}</h1>
@@ -136,6 +145,7 @@ export default function PlanetDetail() {
           </div>
 
           {/* Everything below the hero */}
+          {/* Hide Climate Terrain and Orbital/Rotation Period until the planet data request is complete */}
           <div className="pageContent">
             {!loading && (
               <>

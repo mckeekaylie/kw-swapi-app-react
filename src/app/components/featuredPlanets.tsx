@@ -50,12 +50,13 @@ const FeaturedPlanets = (props) => {
       <div className="flex justifyCenterAlignCenter">
         {loading && (
           <motion.div
-            initial={{ opacity: 1, scale: 1 }}
-            animate={{ scale: 1.4, opacity: 0 }}
-            exit={{ scale: 1.2, opacity: 0 }}
+            initial={{ transform: "translateX(-6.5rem)" }}
+            animate={{ transform: "translateX(6.5rem)" }}
+            exit={{ transform: "translateX(-6.5rem)" }}
             transition={{
               duration: 1,
               repeat: Infinity,
+              type: "spring",
             }}
           >
             <Image
