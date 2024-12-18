@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function NotFound() {
   return (
     <div className={styles.errorScreen}>
-      <h1>...That's no planet.</h1>
+      <h1>...That\'s no planet.</h1>
       <Image
         className="mt-2 mb-2"
         src="/images/icons/death-star.svg"
@@ -13,9 +13,9 @@ export default function NotFound() {
         height={180}
         alt=""
       />
-        <Link href="/" className={styles.goHome}>
-          Return to the galaxy
-        </Link>
+      <Link href="/" className={styles.goHome}>
+        Return to the galaxy
+      </Link>
     </div>
   );
 }
