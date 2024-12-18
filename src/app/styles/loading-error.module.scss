@@ -16,6 +16,18 @@
   position: absolute;
 }
 
+/* 404 SCREEN */
+.goHome {
+  margin: 1rem;
+  font-size: 1.25rem;
+  color: vars.$yellow;
+  text-decoration: underline;
+}
+
+.goHome:hover {
+  color: vars.$orange;
+}
+
 // GALAXY BACKGROUND
 #space,
 .stars {

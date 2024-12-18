@@ -40,7 +40,7 @@ const FeaturedPlanets = (props) => {
                 {/* Right side of the card */}
                 <div className={`${styles.featuredPlanetRightSide} p-1`}>
                   <Link
-                    href={`/planet-detail/${planet.name}`}
+                    href={`/planet-detail/${planet.uid}`}
                     className="styles.featuredPlanetNameLink"
                   >
                     <p className={styles.featuredPlanetName}>{planet.name}</p>

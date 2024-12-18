@@ -2,15 +2,13 @@
 
 // COMPONENTS
 import ClimateTerrain from "@/app/components/climateTerrain";
-import ErrorScreen from "../../components/error";
-import LoadingScreen from "../../components/loading";
 import OrbitRotate from "../../components/orbitRotate";
 
 // INTERFACES
 import { Planets } from "../../interfaces/planets";
 
-// HOOKS
-import { GetPlanets } from "../../hooks/getPlanets";
+// IMAGES
+import hyperdrive from "../../../../public/images/hyperdrive.webp";
 
 // MOTION
 import { AnimatePresence, motion } from "framer-motion";
@@ -26,48 +24,37 @@ import { useEffect, useState } from "react";
 // STYLES
 import styles from "../../styles/detail.module.scss";
 
-import hyperdrive from "../../../../public/images/hyperdrive.webp";
-
 export default function PlanetDetail() {
-  const { data, error, isLoading } = GetPlanets();
-
   const [planet, setPlanet] = useState<Planets>();
+  const [loading, setLoading] = useState<boolean>(true);
 
-  const planetParam = useParams<{ planet: string }>();
+  const planetParam = useParams<{ planetId: string }>();
 
   useEffect(() => {
-    const planetsContainer: Planets[] = [];
-
-    // deep clone the results array inside the response object by pushing each result to planetsContainer
-    if (data && data.length !== undefined) {
-      for (let i = 0; i <= data.length; i++) {
-        data[i]?.results.map((x) => {
-          planetsContainer.push(x);
-        });
-      }
-
-      // find the planet that matches the param passed via useParams, then store that planet as state variable planet
-      const activePlanet = planetsContainer.find(
-        (x) => x.name === decodeURIComponent(planetParam.planet)
+    const fetchData = async () => {
+      const res = await fetch(
+        `https://www.swapi.tech/api/planets/${planetParam.planetId}`
       );
 
-      // if the planetParam passed does not match a planet inside planetsContainer, render 404 page
-      if (activePlanet === undefined) {
-        notFound();
+      if (!res.ok) {
+        setLoading(false);
+        const error = new Error("An error occurred while fetching the data.");
+        throw error;
       }
 
-      setPlanet(activePlanet);
-    }
-  }, [data, planetParam.planet]);
+      const planet = await res.json();
 
-  // render loading screen if getPlanets returns isLoading = true
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
+      setPlanet(planet.result.properties);
 
-  // render error screen if getPlanets returns error
-  if (error) {
-    return <ErrorScreen />;
+      setLoading(false);
+    };
+
+    fetchData();
+  }, [planetParam.planetId]);
+
+  // if the fetchData logic is complete and the planet is still undefined, render 404 page
+  if (!loading && planet === undefined) {
+    notFound();
   }
 
   return (

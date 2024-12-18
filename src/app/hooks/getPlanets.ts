@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import { PlanetRes } from "../interfaces/planets";
 
-const url = "https://swapi.dev/api/planets";
+const url = "https://www.swapi.tech/api/planets";
 
 function fetcher(url): Promise<PlanetRes[]> {
   return fetch(url).then((res) => {
@@ -24,7 +24,7 @@ export function GetPlanets() {
 
   // Gather each url needed to request ALL planets from SWAPI since the response data is paginated
   for (let i = 1; i <= 6; i++) {
-    urls.push(`${url}?page=${i}`);
+    urls.push(`${url}?page=${i}&limit=10`);
   }
 
   const { data, error, isLoading, isValidating } = useSWR<PlanetRes[]>(

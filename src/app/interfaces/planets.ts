@@ -1,5 +1,6 @@
 export interface Planets {
   name: string;
+  uid: number;
   rotation_period: string;
   orbital_period: string;
   diameter: string;
