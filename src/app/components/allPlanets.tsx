@@ -81,7 +81,7 @@ const AllPlanets = (props) => {
                   <div key={planet.name} data-testid="planetChip">
                     <Link
                       className={styles.planetChip}
-                      href={`/planet-detail/${planet.name}`}
+                      href={`/planet-detail/${planet.uid}`}
                     >
                       <Image
                         className={styles.planetChipIcon}
