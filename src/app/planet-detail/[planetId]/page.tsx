@@ -11,7 +11,7 @@ import { Planets } from "../../interfaces/planets";
 import hyperdrive from "../../../../public/images/hyperdrive.webp";
 
 // MOTION
-import { AnimatePresence, easeIn, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 // NEXT
 import Image from "next/image";
