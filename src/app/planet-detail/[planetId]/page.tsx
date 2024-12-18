@@ -11,7 +11,7 @@ import { Planets } from "../../interfaces/planets";
 import hyperdrive from "../../../../public/images/hyperdrive.webp";
 
 // MOTION
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, easeIn, motion } from "framer-motion";
 
 // NEXT
 import Image from "next/image";
@@ -32,6 +32,7 @@ export default function PlanetDetail() {
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log(planetParam.planetId);
       const res = await fetch(
         `https://www.swapi.tech/api/planets/${planetParam.planetId}`
       );
@@ -91,35 +92,62 @@ export default function PlanetDetail() {
               height={720}
               priority
             />
-            <div style={{ position: "absolute" }}>
-              <h1 className="mb-1 fw-700">{planet?.name}</h1>
-              <div className={styles.infoBelowPlanetName}>
-                <p className="bigger" data-testid="diameter">
-                  <span className="fw-500">Diameter: </span>
-                  <span className="fw-400">{planet?.diameter}</span>
-                </p>
-                <p className="bigger" data-testid="gravity">
-                  <span className="fw-500">Gravity: </span>
-                  <span className="fw-400">{planet?.gravity}</span>
-                </p>
-                <p className="bigger" data-testid="surfaceWater">
-                  <span className="fw-500">Surface Water: </span>
-                  <span className="fw-400">{planet?.surface_water}</span>
-                </p>
+
+            {loading && (
+              <div style={{ position: "absolute" }}>
+                <motion.div
+                  initial={{ opacity: 1, scale: 1 }}
+                  animate={{ scale: 1.4, opacity: 0 }}
+                  exit={{ scale: 1.2, opacity: 0 }}
+                  transition={{
+                    duration: 1,
+                    repeat: Infinity,
+                  }}
+                >
+                  <Image
+                    src="/images/icons/c-3po.svg"
+                    width={180}
+                    height={180}
+                    alt=""
+                  />
+                </motion.div>
               </div>
-            </div>
+            )}
+
+            {!loading && (
+              <div style={{ position: "absolute" }}>
+                <h1 className="mb-1 fw-700">{planet?.name}</h1>
+                <div className={styles.infoBelowPlanetName}>
+                  <p className="bigger" data-testid="diameter">
+                    <span className="fw-500">Diameter: </span>
+                    <span className="fw-400">{planet?.diameter}</span>
+                  </p>
+                  <p className="bigger" data-testid="gravity">
+                    <span className="fw-500">Gravity: </span>
+                    <span className="fw-400">{planet?.gravity}</span>
+                  </p>
+                  <p className="bigger" data-testid="surfaceWater">
+                    <span className="fw-500">Surface Water: </span>
+                    <span className="fw-400">{planet?.surface_water}</span>
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Everything below the hero */}
           <div className="pageContent">
-            {/* Climate & Terrain */}
-            <section id="climateTerrain">
-              <ClimateTerrain planet={planet}></ClimateTerrain>
-              <div className="spacer"></div>
-            </section>
-            <section id="orbitalRotationalPeriod">
-              <OrbitRotate planet={planet}></OrbitRotate>
-            </section>
+            {!loading && (
+              <>
+                <section id="climateTerrain">
+                  <ClimateTerrain planet={planet}></ClimateTerrain>
+                  <div className="spacer"></div>
+                </section>
+                <section id="orbitalRotationalPeriod">
+                  <OrbitRotate planet={planet}></OrbitRotate>
+                </section>
+              </>
+            )}
           </div>
         </motion.div>
       </AnimatePresence>

@@ -1,12 +1,76 @@
+// INTERFACES
+import { Planets } from "../interfaces/planets";
+
+// MOTION
+import { motion } from "framer-motion";
+
 // NEXT
 import Image from "next/image";
 import Link from "next/link";
+
+// REACT
+import { useEffect, useState } from "react";
 
 // STYLES
 import styles from "../styles/home.module.scss";
 import vars from "../styles/variables.module.scss";
 
 const FeaturedPlanets = (props) => {
+  const [featuredPlanetData, setFeaturedPlanetData] = useState<Planets[]>();
+  const [loading, setLoading] = useState<boolean>();
+
+  useEffect(() => {
+    const planetsContainer: Planets[] = [];
+
+    setLoading(true);
+
+    const fetchData = async () => {
+      for (let i = 0; i < props.featured.length; i++) {
+        const res = await fetch(
+          `https://www.swapi.tech/api/planets/${props.featured[i].uid}`
+        );
+
+        const planet = await res.json();
+
+        const planetProps = planet.result.properties;
+        planetProps["uid"] = props.featured[i].uid;
+
+        planetsContainer.push(planetProps);
+      }
+
+      setFeaturedPlanetData(planetsContainer);
+      setLoading(false);
+    };
+
+    fetchData();
+  }, [props.featured]);
+
+  if (loading) {
+    return (
+      <div className="flex justifyCenterAlignCenter">
+        {loading && (
+          <motion.div
+            initial={{ opacity: 1, scale: 1 }}
+            animate={{ scale: 1.4, opacity: 0 }}
+            exit={{ scale: 1.2, opacity: 0 }}
+            transition={{
+              duration: 1,
+              repeat: Infinity,
+            }}
+          >
+            <Image
+              src="/images/icons/bb-8.svg"
+              width={180}
+              height={180}
+              alt=""
+              style={{ width: 80, height: 80 }}
+            />
+          </motion.div>
+        )}
+      </div>
+    );
+  }
+
   return (
     <section id="FeaturedPlanets">
       <h2 className="mb-1" style={{ color: vars.yellow, textAlign: "center" }}>
@@ -14,7 +78,7 @@ const FeaturedPlanets = (props) => {
       </h2>
       {/* Wrap planet columns in a row */}
       <div className="row">
-        {props.featured.map((planet) => (
+        {featuredPlanetData?.map((planet) => (
           // Create a column for each planet
           <div
             className="col"
